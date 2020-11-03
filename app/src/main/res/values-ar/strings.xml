@@ -60,6 +60,19 @@
     <string name="choose_language"><![CDATA[إختر <font color="#F61C00">اللغة</font>]]></string>
     <string name="next">التالي</string>
     <string name="login2"><![CDATA[تسجيل <font color="#F61C00">الدخول</font>]]></string>
+    <string name="please_enter_code_sent_to">من فضلك ادخل الكود المرسل الى</string>
+    <string name="resend">اعد إرسال فى</string>
+    <string name="inv_code">الكود غير صحيح</string>
+    <string name="name">الإسم</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="chronic_diseases">أمراض مزمنة</string>
+    <string name="ch_gender">إختر الجنس</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
+    <string name="ch_blood">إختر فصيلة الدم</string>
+    <string name="ch_diseases">إختر الامراض المزمنة</string>
+    <string name="select">إختر</string>
+    <string name="resend2">اعد الارسال</string>
 
 
 </resources>

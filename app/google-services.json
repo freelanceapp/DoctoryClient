@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "377155158069",
+    "firebase_url": "https://doctory-3d4c9.firebaseio.com",
+    "project_id": "doctory-3d4c9",
+    "storage_bucket": "doctory-3d4c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377155158069:android:3694b0b163c8002632f17c",
+        "android_client_info": {
+          "package_name": "com.doctory_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377155158069-h5aegqja7uua386bf40kao0dse8g41og.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doctory_client",
+            "certificate_hash": "0b354f3a0c02eaba29510595124a7d68aea8edf3"
+          }
+        },
+        {
+          "client_id": "377155158069-6nscn8b9a9qibpni050u2a7a912n4jg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAHXVFNBBIkhEqVoAcGRUUSE709jLrRLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377155158069-6nscn8b9a9qibpni050u2a7a912n4jg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

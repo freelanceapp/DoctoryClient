@@ -60,4 +60,17 @@
     <string name="choose_language"><![CDATA[Choose <font color="#F61C00">Language</font>]]></string>
     <string name="next">Next</string>
     <string name="login2"><![CDATA[Log <font color="#F61C00">In</font>]]></string>
+    <string name="please_enter_code_sent_to">Please enter code sent to</string>
+    <string name="resend">Resend in</string>
+    <string name="inv_code">Invalid Code</string>
+    <string name="name">Name</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="chronic_diseases">Chronic diseases</string>
+    <string name="ch_gender">Choose Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="ch_blood">Choose blood type</string>
+    <string name="ch_diseases">Choose diseases</string>
+    <string name="select">Select</string>
+    <string name="resend2">Resend</string>
 </resources>
