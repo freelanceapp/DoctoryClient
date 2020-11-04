@@ -73,6 +73,13 @@
     <string name="ch_diseases">إختر الامراض المزمنة</string>
     <string name="select">إختر</string>
     <string name="resend2">اعد الارسال</string>
+    <string name="appointments">مواعيد</string>
+    <string name="consulting">إستشارات</string>
+    <string name="medicine">علاجي</string>
+    <string name="no_data_to_show">لا توجد اقسام لعرضها</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="contact_us">إتصل بنا</string>
+    <string name="social_media">التواصل الاجتماعي</string>
 
 
 </resources>

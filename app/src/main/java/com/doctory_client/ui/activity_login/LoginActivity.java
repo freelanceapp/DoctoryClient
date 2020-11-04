@@ -16,6 +16,7 @@ import com.doctory_client.models.LoginModel;
 import com.doctory_client.mvp.activity_login_presenter.ActivityLoginPresenter;
 import com.doctory_client.mvp.activity_login_presenter.ActivityLoginView;
 import com.doctory_client.ui.activity_confirm_code.ConfirmCodeActivity;
+import com.doctory_client.ui.activity_home.HomeActivity;
 import com.doctory_client.ui.activity_sign_up.SignUpActivity;
 
 import io.paperdb.Paper;
@@ -44,6 +45,12 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
         presenter = new ActivityLoginPresenter(this,this);
         binding.btnLogin.setOnClickListener(view -> {
             presenter.checkData(model);
+        });
+
+        binding.tvSkip.setOnClickListener(view -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
