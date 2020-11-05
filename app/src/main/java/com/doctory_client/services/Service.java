@@ -1,5 +1,7 @@
 package com.doctory_client.services;
 
+import com.doctory_client.models.NearbyModel;
+import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
 
@@ -22,5 +24,19 @@ public interface Service {
                                       @Query(value = "language") String language,
                                       @Query(value = "key") String key);
 
+    @GET("place/details/json")
+    Call<PlaceDetailsModel> getPlaceDetails(@Query(value = "placeid") String placeid,
+                                            @Query(value = "fields") String fields,
+                                            @Query(value = "language") String language,
+                                            @Query(value = "key") String key
+    );
 
+    @GET("place/nearbysearch/json")
+    Call<NearbyModel> nearbyPlaceRankBy(@Query(value = "location") String location,
+                                        @Query(value = "keyword") String keyword,
+                                        @Query(value = "rankby") String rankby,
+                                        @Query(value = "language") String language,
+                                        @Query(value = "pagetoken") String pagetoken,
+                                        @Query(value = "key") String key
+    );
 }

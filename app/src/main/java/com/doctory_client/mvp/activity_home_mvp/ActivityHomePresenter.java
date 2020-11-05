@@ -29,13 +29,16 @@ public class ActivityHomePresenter {
     private Fragment_More fragment_more;
     private Preferences preference;
     private UserModel userModel;
+    private double lat=0.0,lng=0.0;
 
-    public ActivityHomePresenter(Context context,HomeActivityView view, FragmentManager fragmentManager) {
+    public ActivityHomePresenter(Context context,HomeActivityView view, FragmentManager fragmentManager,double lat,double lng) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.view = view;
         preference = Preferences.getInstance();
         userModel = preference.getUserData(context);
+        this.lat = lat;
+        this.lng = lng;
         displayFragmentHome();
     }
 
@@ -63,7 +66,7 @@ public class ActivityHomePresenter {
     }
     private void displayFragmentHome(){
         if (fragment_home==null){
-            fragment_home = Fragment_Home.newInstance();
+            fragment_home = Fragment_Home.newInstance(lat,lng);
         }
 
         if (fragment_appointment!=null&&fragment_appointment.isAdded()){

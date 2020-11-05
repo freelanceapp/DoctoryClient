@@ -27,11 +27,7 @@ public class SplashPresenter {
         new Handler().postDelayed(()->{
 
             if (userSettingsModel!=null&&userSettingsModel.isLanguageSelected()){
-                if (userModel==null){
-                    view.onNavigateToLoginActivity();
-                }else {
-                    view.onNavigateToHomeActivity();
-                }
+                view.onNavigateToLocationActivity();
             }else {
                 view.onNavigateToLanguageActivity();
 

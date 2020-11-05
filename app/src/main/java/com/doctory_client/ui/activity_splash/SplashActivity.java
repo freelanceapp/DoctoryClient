@@ -24,6 +24,7 @@ import com.doctory_client.mvp.activity_splash_mvp.SplashPresenter;
 import com.doctory_client.mvp.activity_splash_mvp.SplashView;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.ui.activity_language.LanguageActivity;
+import com.doctory_client.ui.activity_location.LocationActivity;
 import com.doctory_client.ui.activity_login.LoginActivity;
 
 import io.paperdb.Paper;
@@ -71,16 +72,12 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     }
 
     @Override
-    public void onNavigateToLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void onNavigateToLocationActivity() {
+        Intent intent = new Intent(this, LocationActivity.class);
         startActivity(intent);
         finish();
     }
 
-    @Override
-    public void onNavigateToHomeActivity() {
-
-    }
 
     private void refreshActivity(String lang) {
         new Handler(Looper.getMainLooper()).postDelayed(()->{

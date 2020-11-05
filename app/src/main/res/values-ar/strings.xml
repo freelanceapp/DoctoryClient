@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">دكتوري</string>
+    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
+    <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">الحقل مطلوب</string>
     <string name="login">الدخول</string>
     <string name="code">الكود</string>
@@ -80,6 +82,24 @@
     <string name="change_language">تغيير اللغة</string>
     <string name="contact_us">إتصل بنا</string>
     <string name="social_media">التواصل الاجتماعي</string>
-
+    <string name="doctor">طبيبك</string>
+    <string name="pharmacy">اقرب صيدلية</string>
+    <string name="labs">المعامل</string>
+    <string name="x_ray_center">مراكز أشعة</string>
+    <string name="medical_advice">نصائح طبية</string>
+    <string name="emergency">طوارئ</string>
+    <string name="no_ads_to_show">لاتوجد إعلانات لعرضها</string>
+    <string name="km">كم</string>
+    <string name="get_location"><![CDATA[جار تحديد <font color="#F61C00">موقعك...</font>]]></string>
+    <string name="customers_rating">تقييم العملاء</string>
+    <string name="iraqi_dinar">دينار عراقي</string>
+    <string name="working_hours">ساعات العمل</string>
+    <string name="ok2">حسنا!</string>
+    <string name="work_hour_not_aval">ساعات العمل غير متاحة</string>
+    <string name="show">عرض</string>
+    <string name="open_now">مفتوح</string>
+    <string name="closed">مغلق</string>
+    <string name="available_doctors">الأطباء المتاحين</string>
+    <string name="no_doctors_available">لا توجد أطباء متاحين</string>
 
 </resources>

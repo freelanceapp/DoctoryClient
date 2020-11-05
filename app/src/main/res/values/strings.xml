@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Doctory</string>
+    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
+    <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">Field required</string>
     <string name="login">Log In</string>
     <string name="code">Code</string>
@@ -80,4 +82,24 @@
     <string name="change_language">Change Language</string>
     <string name="contact_us">Contact Us</string>
     <string name="social_media">Social Media</string>
+    <string name="doctor">Doctor</string>
+    <string name="pharmacy">Pharmacy</string>
+    <string name="labs">Labs</string>
+    <string name="x_ray_center">X-Ray Center</string>
+    <string name="medical_advice">Medical Advice</string>
+    <string name="emergency">Emergency</string>
+    <string name="no_ads_to_show">No Ads to show</string>
+    <string name="km">Km</string>
+    <string name="get_location"><![CDATA[Getting <font color="#F61C00">Location...</font>]]></string>
+    <string name="customers_rating">Cutomer Rating</string>
+    <string name="iraqi_dinar">Iraqi dinar</string>
+    <string name="working_hours">Working Hours</string>
+    <string name="ok2">Ok</string>
+    <string name="work_hour_not_aval">Working hours not available</string>
+    <string name="show">Show</string>
+    <string name="open_now">Open Now</string>
+    <string name="closed">Closed</string>
+    <string name="available_doctors">Available Doctors</string>
+    <string name="no_doctors_available">No Doctors Available</string>
+
 </resources>

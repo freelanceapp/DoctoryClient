@@ -65,6 +65,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.5.0'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.ethanhua:skeleton:1.1.2'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
+
 
 
 }

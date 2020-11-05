@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     private ActivityHomeBinding binding;
     private FragmentManager fragmentManager;
     private ActivityHomePresenter presenter;
+    private double lat=0.0,lng=0.0;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -39,12 +40,19 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent  = getIntent();
+        lat = intent.getDoubleExtra("lat",0.0);
+        lng = intent.getDoubleExtra("lng",0.0);
     }
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();
-        presenter = new ActivityHomePresenter(this, this, fragmentManager);
+        presenter = new ActivityHomePresenter(this, this, fragmentManager,lat,lng);
         binding.navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -52,6 +60,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
                 return true;
             }
         });
+
+
     }
 
 

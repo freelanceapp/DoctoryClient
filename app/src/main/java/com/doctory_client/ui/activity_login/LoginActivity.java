@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
     private ActivityLoginBinding binding;
     private LoginModel model;
     private ActivityLoginPresenter presenter;
+    private double lat=0.0,lng=0.0;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -34,7 +35,14 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        lat = intent.getDoubleExtra("lat",0.0);
+        lng = intent.getDoubleExtra("lng",0.0);
     }
 
     private void initView() {
@@ -49,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
 
         binding.tvSkip.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("lat",lat);
+            intent.putExtra("lng",lng);
             startActivity(intent);
             finish();
         });
@@ -59,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
         Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("phone_code",model.getPhone_code());
         intent.putExtra("phone",model.getPhone());
+        intent.putExtra("lat",lat);
+        intent.putExtra("lng",lng);
         startActivity(intent);
         finish();
 

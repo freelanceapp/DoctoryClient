@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#006699</color>
     <color name="colorAccent">#006699</color>
     <color name="color1">#F61C00</color>
+    <color name="color2">#F0FAFF</color>
     <color name="white">#fff</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
@@ -19,5 +20,6 @@
     <color name="gray8">#707070</color>
     <color name="gray9">#757575</color>
     <color name="gray5_tans">#22c3c3c3</color>
+    <color name="rate_color">#FFD800</color>
 
 </resources>

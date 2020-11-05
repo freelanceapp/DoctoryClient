@@ -62,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySignUpV
     private DiseasesAdapter adapter;
     private SpinnerDiseasesAdapter spinnerDiseasesAdapter;
     private  AlertDialog dialog;
+    private double lat=0.0,lng=0.0;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -84,6 +85,9 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySignUpV
         if (intent != null) {
             phone_code = intent.getStringExtra("phone_code");
             phone = intent.getStringExtra("phone");
+            lat =  intent.getDoubleExtra("lat",0.0);
+            lng = intent.getDoubleExtra("lng",0.0);
+
 
         }
     }
