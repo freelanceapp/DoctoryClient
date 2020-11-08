@@ -101,5 +101,14 @@
     <string name="closed">Closed</string>
     <string name="available_doctors">Available Doctors</string>
     <string name="no_doctors_available">No Doctors Available</string>
+    <string name="your_doctor">Your Doctor</string>
+    <string name="search2">Search</string>
+    <string name="specialization">Specialization</string>
+    <string name="nearby">NearBy</string>
+    <string name="city">City</string>
+    <string name="filter_by">Filter By:</string>
+    <string name="distance">Distance :</string>
+    <string name="doctor2">Doctor/</string>
+    <string name="details">Details</string>
 
 </resources>

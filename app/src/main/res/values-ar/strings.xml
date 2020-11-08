@@ -101,5 +101,14 @@
     <string name="closed">مغلق</string>
     <string name="available_doctors">الأطباء المتاحين</string>
     <string name="no_doctors_available">لا توجد أطباء متاحين</string>
+    <string name="your_doctor">طبيبك</string>
+    <string name="search2">عن ماذا تبحث ؟</string>
+    <string name="specialization">التخصص</string>
+    <string name="nearby">الأقرب</string>
+    <string name="city">المدينة</string>
+    <string name="filter_by">تصفية حسب:</string>
+    <string name="distance">المسافة :</string>
+    <string name="doctor2">دكتور/</string>
+    <string name="details">التفاصيل</string>
 
 </resources>

@@ -12,80 +12,88 @@
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:fitsSystemWindows="true"
-            android:fillViewport="true"
-            >
+            android:fillViewport="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
 
                 >
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/pager"
+                    <FrameLayout
+                        android:id="@+id/flPager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab"
-                        android:layout_width="wrap_content"
-                        android:layout_height="8dp"
-                        android:layout_gravity="bottom|start"
-                        android:layout_margin="10dp"
-                        app:tabBackground="@drawable/tab_indicator"
-                        app:tabGravity="fill"
-                        app:tabIndicatorHeight="0dp"
-                        app:tabMaxWidth="0dp"
-                        app:tabMode="scrollable" />
+                        >
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-                    <ProgressBar
-                        android:id="@+id/progBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="8dp"
+                            android:layout_gravity="bottom|start"
+                            android:layout_margin="10dp"
+                            app:tabBackground="@drawable/tab_indicator"
+                            app:tabGravity="fill"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabMaxWidth="7dp"
+                            app:tabMode="scrollable" />
 
-                  <FrameLayout
-                      android:id="@+id/flNoAds"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      >
-                      <ImageView
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:background="@color/gray2"
-                          />
-                      <LinearLayout
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center"
-                          android:orientation="vertical"
-                          android:gravity="center"
-                          >
-                          <ImageView
-                              android:layout_width="40dp"
-                              android:layout_height="40dp"
-                              android:src="@drawable/ic_gallery"
-                              app:tint="@color/gray4"
-                              />
-                          <TextView
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:textSize="15sp"
-                              android:textColor="@color/gray4"
-                              android:text="@string/no_ads_to_show"
-                              />
-                      </LinearLayout>
-                  </FrameLayout>
+                        <ProgressBar
+                            android:id="@+id/progBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/flNoAds"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/gray2" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_gallery"
+                                app:tint="@color/gray4" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:textColor="@color/gray4"
+                                android:text="@string/no_ads_to_show" />
+                        </LinearLayout>
+                    </FrameLayout>
                 </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewDoctor"
                         android:layout_width="0dp"
@@ -94,20 +102,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img1"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -115,13 +123,13 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/doctor"
-                                />
+                                android:text="@string/doctor" />
                         </FrameLayout>
                     </androidx.cardview.widget.CardView>
+
                     <Space
                         android:layout_width="5dp"
-                        android:layout_height="0dp"/>
+                        android:layout_height="0dp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewPharmacy"
@@ -131,20 +139,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img2"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -152,18 +160,19 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/pharmacy"
-                                />
+                                android:text="@string/pharmacy" />
                         </FrameLayout>
 
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
 
                     >
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewLabs"
                         android:layout_width="0dp"
@@ -172,20 +181,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img3"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -193,13 +202,13 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/labs"
-                                />
+                                android:text="@string/labs" />
                         </FrameLayout>
                     </androidx.cardview.widget.CardView>
+
                     <Space
                         android:layout_width="5dp"
-                        android:layout_height="0dp"/>
+                        android:layout_height="0dp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewRays"
@@ -209,20 +218,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img4"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -230,18 +239,19 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/x_ray_center"
-                                />
+                                android:text="@string/x_ray_center" />
                         </FrameLayout>
 
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
 
                     >
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewAdvice"
                         android:layout_width="0dp"
@@ -250,20 +260,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img5"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -271,13 +281,13 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/medical_advice"
-                                />
+                                android:text="@string/medical_advice" />
                         </FrameLayout>
                     </androidx.cardview.widget.CardView>
+
                     <Space
                         android:layout_width="5dp"
-                        android:layout_height="0dp"/>
+                        android:layout_height="0dp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewEmergency"
@@ -287,20 +297,20 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="@color/white"
-                        android:layout_margin="5dp"
-                        >
+                        android:layout_margin="5dp">
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img6"
                                 app:riv_border_width="0dp"
-                                app:riv_corner_radius="8dp"
-                                />
+                                app:riv_corner_radius="8dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -308,8 +318,7 @@
                                 android:layout_margin="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
-                                android:text="@string/emergency"
-                                />
+                                android:text="@string/emergency" />
                         </FrameLayout>
 
                     </androidx.cardview.widget.CardView>
