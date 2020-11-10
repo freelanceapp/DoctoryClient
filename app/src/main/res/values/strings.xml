@@ -110,5 +110,16 @@
     <string name="distance">Distance :</string>
     <string name="doctor2">Doctor/</string>
     <string name="details">Details</string>
+    <string name="doctor_details">Doctor Details</string>
+    <string name="ratings">Ratings</string>
+    <string name="reserve">Clinic reservation</string>
+    <string name="reserve_consultation">Reserve consultation</string>
+    <string name="price">Price :</string>
+    <string name="clinic">Clinic</string>
+    <string name="live">Live</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="available_appointments">Available Appointments</string>
+    <string name="write_your_consultation">Write your consultation</string>
+    <string name="send">Send</string>
 
 </resources>

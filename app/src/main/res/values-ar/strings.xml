@@ -22,7 +22,7 @@
     <string name="home">الرئيسية</string>
     <string name="chat">المحادثة</string>
     <string name="profile">الملف الشخصي</string>
-    <string name="more">المذيد</string>
+    <string name="more">المزيد</string>
     <string name="field_required">الحقل مطلوب</string>
     <string name="inv_email">البريد الالكتروني غير صحيح</string>
     <string name="cannot_signup">لا يمكن انشاء حساب دون الموافقة الشروط والاحكام</string>
@@ -110,5 +110,16 @@
     <string name="distance">المسافة :</string>
     <string name="doctor2">دكتور/</string>
     <string name="details">التفاصيل</string>
+    <string name="doctor_details">بيانات الطبيب</string>
+    <string name="ratings">التقييمات</string>
+    <string name="reserve">حجز عيادة</string>
+    <string name="reserve_consultation">حجز إستشارة</string>
+    <string name="price">سعر الكشف :</string>
+    <string name="clinic">Clinic</string>
+    <string name="live">لايف</string>
+    <string name="choose_date">إختر اليوم</string>
+    <string name="available_appointments">المواعيد المتاحة</string>
+    <string name="write_your_consultation">إكتب إستشارتك</string>
+    <string name="send">إرسال</string>
 
 </resources>
