@@ -17,6 +17,7 @@ import com.doctory_client.databinding.ActivityHomeBinding;
 import com.doctory_client.language.Language;
 import com.doctory_client.mvp.activity_home_mvp.ActivityHomePresenter;
 import com.doctory_client.mvp.activity_home_mvp.HomeActivityView;
+import com.doctory_client.ui.activity_doctor.DoctorActivity;
 import com.doctory_client.ui.activity_login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -61,6 +62,13 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
             }
         });
 
+        binding.flSearch.setOnClickListener(view -> {
+            Intent intent = new Intent(this, DoctorActivity.class);
+            intent.putExtra("lat",lat);
+            intent.putExtra("lng",lng);
+            startActivity(intent);
+        });
+
 
     }
 
@@ -94,11 +102,13 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         binding.navigationView.setSelectedItemId(R.id.home);
     }
 
+
     @Override
     public void onNavigateToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+
     }
 
     @Override
