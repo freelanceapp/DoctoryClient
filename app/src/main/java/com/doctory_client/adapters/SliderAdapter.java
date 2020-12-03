@@ -42,7 +42,7 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.slider_row,container,false);
-        Picasso.get().load(Tags.IMAGE_URL+list.get(position));
+        Picasso.get().load(Tags.base_url+list.get(position).getImage());
         container.addView(binding.getRoot());
         return binding.getRoot();
     }

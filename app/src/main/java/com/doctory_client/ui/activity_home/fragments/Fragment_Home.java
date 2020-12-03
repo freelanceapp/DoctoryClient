@@ -2,6 +2,7 @@ package com.doctory_client.ui.activity_home.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -87,6 +89,7 @@ public class Fragment_Home extends Fragment {
         }
         binding.tab.setupWithViewPager(binding.pager);
 
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         binding.cardViewPharmacy.setOnClickListener(view -> {
             Intent intent = new Intent(activity, GoogleNearybyPlacesActivity.class);
@@ -135,8 +138,14 @@ public class Fragment_Home extends Fragment {
                     } else {
 
                         binding.pager.setVisibility(View.GONE);
+                        binding.ll.setVisibility(View.VISIBLE);
                     }
                 } else if (response.code() == 404) {
+                    try {
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     binding.pager.setVisibility(View.GONE);
                 } else {
                     binding.pager.setVisibility(View.GONE);
@@ -155,7 +164,7 @@ public class Fragment_Home extends Fragment {
                     binding.progBar.setVisibility(View.GONE);
                     binding.pager.setVisibility(View.GONE);
 
-                    Log.e("Error", t.getMessage());
+                    Log.e("Errossr", t.toString());
 
                 } catch (Exception e) {
 
