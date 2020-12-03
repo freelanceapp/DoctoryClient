@@ -121,5 +121,6 @@
     <string name="available_appointments">المواعيد المتاحة</string>
     <string name="write_your_consultation">إكتب إستشارتك</string>
     <string name="send">إرسال</string>
+    <string name="server_error">مشكله فى السيرفر</string>
 
 </resources>

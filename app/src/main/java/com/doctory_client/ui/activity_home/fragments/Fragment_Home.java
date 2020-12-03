@@ -3,6 +3,8 @@ package com.doctory_client.ui.activity_home.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +17,31 @@ import androidx.fragment.app.Fragment;
 import com.doctory_client.R;
 import com.doctory_client.adapters.SliderAdapter;
 import com.doctory_client.databinding.FragmentHomeBinding;
+import com.doctory_client.models.Slider_Model;
+import com.doctory_client.remote.Api;
+import com.doctory_client.tags.Tags;
 import com.doctory_client.ui.activity_doctor.DoctorActivity;
 import com.doctory_client.ui.activity_emergency.EmergencyActivity;
 import com.doctory_client.ui.activity_google_nearby_places.GoogleNearybyPlacesActivity;
 import com.doctory_client.ui.activity_home.HomeActivity;
 import com.doctory_client.ui.activity_medical_advice.MedicalAdviceActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Home extends Fragment {
     private FragmentHomeBinding binding;
     private double lat=0.0,lng=0.0;
     private HomeActivity activity;
     private SliderAdapter sliderAdapter;
+    private int current_page = 0, NUM_PAGES;
 
 
     public static Fragment_Home newInstance(double lat,double lng){
@@ -44,9 +57,27 @@ public class Fragment_Home extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false);
         initView();
+        change_slide_image();
         return binding.getRoot();
     }
-
+    private void change_slide_image() {
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (current_page == NUM_PAGES) {
+                    current_page = 0;
+                }
+                binding.pager.setCurrentItem(current_page++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 3000, 3000);
+    }
     private void initView() {
         activity = (HomeActivity) getActivity();
         Bundle bundle = getArguments();
@@ -88,16 +119,49 @@ public class Fragment_Home extends Fragment {
     }
 
     private void getSliderData() {
-        List<Integer> data = new ArrayList<>();
-        data.add(R.drawable.img1);
-        data.add(R.drawable.img2);
-        data.add(R.drawable.img3);
-        data.add(R.drawable.img4);
+        binding.progBar.setVisibility(View.VISIBLE);
 
-        sliderAdapter = new SliderAdapter(data,activity);
-        binding.pager.setAdapter(sliderAdapter);
-        binding.flPager.setVisibility(View.VISIBLE);
-        binding.flNoAds.setVisibility(View.GONE);
-        binding.progBar.setVisibility(View.GONE);
+        Api.getService(Tags.base_url).get_slider().enqueue(new Callback<Slider_Model>() {
+            @Override
+            public void onResponse(Call<Slider_Model> call, Response<Slider_Model> response) {
+                binding.progBar.setVisibility(View.GONE);
+
+                if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                    if (response.body().getData().size() > 0) {
+                        NUM_PAGES = response.body().getData().size();
+                        sliderAdapter = new SliderAdapter( response.body().getData(),activity);
+                        binding.pager.setAdapter(sliderAdapter);
+
+                    } else {
+
+                        binding.pager.setVisibility(View.GONE);
+                    }
+                } else if (response.code() == 404) {
+                    binding.pager.setVisibility(View.GONE);
+                } else {
+                    binding.pager.setVisibility(View.GONE);
+                    try {
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Slider_Model> call, Throwable t) {
+                try {
+                    binding.progBar.setVisibility(View.GONE);
+                    binding.pager.setVisibility(View.GONE);
+
+                    Log.e("Error", t.getMessage());
+
+                } catch (Exception e) {
+
+                }
+
+            }
+        });
     }
 }

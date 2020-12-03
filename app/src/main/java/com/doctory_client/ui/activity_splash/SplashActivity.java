@@ -66,6 +66,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public void onNavigateToLanguageActivity() {
+
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.logo, binding.logo.getTransitionName());
         Intent intent = new Intent(this, LanguageActivity.class);
         startActivityForResult(intent,100,optionsCompat.toBundle());

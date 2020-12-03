@@ -1,5 +1,6 @@
 package com.doctory_client.ui.activity_confirm_code;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class ConfirmCodeActivity extends AppCompatActivity implements ActivityCo
     private String phone = "";
     private boolean canSend = false;
     private ActivityConfirmCodePresenter presenter;
+    private ProgressDialog dialog;
 
 
     @Override
@@ -116,13 +118,46 @@ public class ConfirmCodeActivity extends AppCompatActivity implements ActivityCo
 
     }
 
+
+
+
+
     @Override
     public void onUserNoFound() {
         Intent intent = new Intent(this, SignUpActivity.class);
-        intent.putExtra("phone_code",phone_code);
-        intent.putExtra("phone",phone);
+        intent.putExtra("phone_code", phone_code);
+        intent.putExtra("phone", phone);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onFailed() {
+        Toast.makeText(ConfirmCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onServer() {
+        Toast.makeText(ConfirmCodeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onLoad() {
+        dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    @Override
+    public void onFinishload() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onnotconnect(String msg) {
+        Toast.makeText(ConfirmCodeActivity.this, msg, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

@@ -121,5 +121,6 @@
     <string name="available_appointments">Available Appointments</string>
     <string name="write_your_consultation">Write your consultation</string>
     <string name="send">Send</string>
+    <string name="server_error">Server Error</string>
 
 </resources>

@@ -1,12 +1,27 @@
 package com.doctory_client.services;
 
+import com.doctory_client.models.AllCityModel;
+import com.doctory_client.models.AllDiseasesModel;
+import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.NearbyModel;
 import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
+import com.doctory_client.models.Slider_Model;
+import com.doctory_client.models.UserModel;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface Service {
@@ -39,4 +54,52 @@ public interface Service {
                                         @Query(value = "pagetoken") String pagetoken,
                                         @Query(value = "key") String key
     );
+    @FormUrlEncoded
+    @POST("api/login")
+    Call<UserModel> login(@Field("phone_code") String phone_code,
+                          @Field("phone") String phone
+
+    );
+    @GET("api/get-diseases")
+    Call<AllDiseasesModel> getdiseas();
+    @FormUrlEncoded
+    @POST("api/patient-register")
+    Call<UserModel> signup(@Field("phone_code") String phone_code,
+                           @Field("phone") String phone,
+                           @Field("name") String name,
+                           @Field("birth_day")String birth_day,
+                           @Field("blood_type")String blood_type,
+                           @Field("gender")String gender,
+                           @Field("user_type")String user_type,
+                           @Field("software_type") String software_type,
+                           @Field("diseases_ids[]") List<String> diseases_ids
+
+
+
+
+    );
+    @Multipart
+    @POST("api/patient-register")
+    Call<UserModel> signup(@Part("phone_code") RequestBody phone_code,
+                           @Part("phone") RequestBody phone,
+                           @Part("name") RequestBody name,
+                           @Part("birth_day")RequestBody birth_day,
+                           @Part("blood_type")RequestBody blood_type,
+                           @Part("gender")RequestBody gender,
+                           @Part("user_type")RequestBody user_type,
+                           @Part("software_type") RequestBody software_type,
+                           @Part("diseases_ids[]") List<RequestBody> diseases_ids,
+                           @Part MultipartBody.Part image
+
+
+
+
+
+    );
+    @GET("api/get-specializations")
+    Call<AllSpiclixationModel> getspicailest();
+    @GET("api/get-cities")
+    Call<AllCityModel> getcities();
+    @GET("api/sliders")
+    Call<Slider_Model> get_slider();
 }

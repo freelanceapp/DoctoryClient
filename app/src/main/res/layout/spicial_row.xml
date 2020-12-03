@@ -4,24 +4,16 @@
     <data>
         <variable
             name="model"
-            type="com.doctory_client.models.FilterModel" />
+            type="com.doctory_client.models.SpecializationModel" />
     </data>
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
 
         >
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="3dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="1dp"
-            android:layout_margin="2dp"
 
-            >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
@@ -38,17 +30,14 @@
                     android:layout_gravity="center_vertical"
                     android:text="@{model.title}"
                     />
-                <ImageView
+                <RadioButton
                     android:id="@+id/imageDelete"
-                    android:layout_width="24dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_close"
                     android:padding="3dp"
-                    app:tint="@color/gray9"
                     android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
     </FrameLayout>
 </layout>

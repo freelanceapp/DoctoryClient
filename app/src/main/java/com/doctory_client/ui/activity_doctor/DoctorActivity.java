@@ -16,16 +16,24 @@ import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.doctory_client.R;
+import com.doctory_client.adapters.CityAdapter;
 import com.doctory_client.adapters.DoctorsAdapter;
 import com.doctory_client.adapters.FilterAdapter;
+import com.doctory_client.adapters.SpicialAdapter;
 import com.doctory_client.databinding.ActivityDoctorBinding;
 import com.doctory_client.databinding.DoctorRowBinding;
 import com.doctory_client.language.Language;
+import com.doctory_client.models.AllCityModel;
+import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.CityModel;
 import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.FilterModel;
 import com.doctory_client.models.SpecializationModel;
+import com.doctory_client.mvp.activity_doctors_mvp.ActivityDoctorsPresenter;
+import com.doctory_client.mvp.activity_doctors_mvp.DoctorsActivityView;
 import com.doctory_client.ui.activity_doctor_details.DoctorDetailsActivity;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.warkiz.widget.IndicatorSeekBar;
@@ -38,8 +46,9 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class DoctorActivity extends AppCompatActivity {
+public class DoctorActivity extends AppCompatActivity implements DoctorsActivityView {
     private ActivityDoctorBinding binding;
+    private ActivityDoctorsPresenter presenter;
     private String lang;
     private double lat=0.0,lng=0.0;
     private float distance =0f;
@@ -48,6 +57,10 @@ public class DoctorActivity extends AppCompatActivity {
     private DoctorsAdapter adapter;
     private FilterAdapter filterAdapter;
     private List<FilterModel> filterModelList;
+    private List<SpecializationModel> specializationModels;
+    private SpicialAdapter spicialAdapter;
+    private List<CityModel> cityModels;
+    private CityAdapter cityAdapter;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -70,7 +83,11 @@ public class DoctorActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        presenter = new ActivityDoctorsPresenter(this, this);
+
         filterModelList = new ArrayList<>();
+        specializationModels=new ArrayList<>();
+cityModels=new ArrayList<>();
         Paper.init(this);
         lang = Paper.book().read("lang","ar");
         binding.setLang(lang);
@@ -78,7 +95,9 @@ public class DoctorActivity extends AppCompatActivity {
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recView.setAdapter(new DoctorsAdapter(new ArrayList<>(),this));
         binding.progBar.setVisibility(View.GONE);
-        binding.llBack.setOnClickListener(view -> finish());
+        binding.llBack.setOnClickListener(view -> {
+        presenter.backPress();
+        });
         binding.llSpecialization.setOnClickListener(view -> openSheet(1));
         binding.llNearby.setOnClickListener(view -> openSheet(2));
         binding.llCity.setOnClickListener(view -> openSheet(3));
@@ -91,6 +110,12 @@ public class DoctorActivity extends AppCompatActivity {
         filterAdapter = new FilterAdapter(filterModelList,this);
         binding.recViewFilter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewFilter.setAdapter(filterAdapter);
+        spicialAdapter=new SpicialAdapter(specializationModels,this);
+        binding.recViewSpecialization.setLayoutManager(new LinearLayoutManager(this));
+        binding.recViewSpecialization.setAdapter(spicialAdapter);
+        cityAdapter=new CityAdapter(cityModels,this);
+        binding.recViewCity.setLayoutManager(new LinearLayoutManager(this));
+        binding.recViewCity.setAdapter(cityAdapter);
         updateDistanceUI(1f);
         binding.seekBarDistance.setOnSeekChangeListener(new OnSeekChangeListener() {
             @Override
@@ -124,8 +149,9 @@ public class DoctorActivity extends AppCompatActivity {
                 filterModelList.set(pos,filterModel);
                 filterAdapter.notifyItemChanged(pos);
             }
-            closeSheet(2);
             binding.llFilter.setVisibility(View.VISIBLE);
+            closeSheet(2);
+
         });
 
 
@@ -141,6 +167,7 @@ public class DoctorActivity extends AppCompatActivity {
             binding.flSpecializationSheet.clearAnimation();
             binding.flSpecializationSheet.startAnimation(animation);
 
+presenter.getSpecilization(type);
 
         }
         else if (type ==2){
@@ -153,7 +180,7 @@ public class DoctorActivity extends AppCompatActivity {
             binding.flCitySheet.clearAnimation();
             binding.flCitySheet.startAnimation(animation);
 
-
+presenter.getcities(type);
         }
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -291,4 +318,98 @@ public class DoctorActivity extends AppCompatActivity {
                 );
         startActivity(intent,options.toBundle());
     }
+
+    @Override
+    public void onFinished() {
+        finish();
+    }
+
+
+
+    @Override
+    public void onProgressShow(int type) {
+if(type==1){
+    binding.progBarSpecialization.setVisibility(View.VISIBLE);
+}
+else if(type==3){
+    binding.progBarCity.setVisibility(View.VISIBLE);
+
+}
+    }
+
+    @Override
+    public void onProgressHide(int type) {
+        if(type==1){
+            binding.progBarSpecialization.setVisibility(View.GONE);
+        }
+        else if(type==3){
+            binding.progBarCity.setVisibility(View.GONE);
+
+        }
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        Toast.makeText(DoctorActivity.this,msg,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSuccess(AllSpiclixationModel allSpiclixationModel) {
+specializationModels.clear();
+specializationModels.addAll(allSpiclixationModel.getData());
+spicialAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSuccesscitie(AllCityModel allCityModel) {
+        cityModels.clear();
+        cityModels.addAll(allCityModel.getData());
+        cityAdapter.notifyDataSetChanged();
+    }
+
+    public void setspicialization(int id) {
+//        specializationModels.clear();
+//        spicialAdapter.notifyDataSetChanged();
+        int pos = getItemPos("specialization");
+        String title = getString(R.string.specialization);
+
+        if (pos==-1){
+            FilterModel filterModel = new FilterModel(title,"specialization");
+            filterModelList.add(filterModel);
+            filterAdapter.notifyDataSetChanged();
+        }else {
+            FilterModel filterModel = filterModelList.get(pos);
+            filterModel.setTitle(title);
+            filterModelList.set(pos,filterModel);
+            filterAdapter.notifyItemChanged(pos);
+        }
+        binding.llFilter.setVisibility(View.VISIBLE);
+        specialization_id=id;
+
+        closeSheet(1);
+
+    }
+    public void setcity(int id) {
+//        specializationModels.clear();
+//        spicialAdapter.notifyDataSetChanged();
+        int pos = getItemPos("city");
+        String title = getString(R.string.city);
+
+        if (pos==-1){
+            FilterModel filterModel = new FilterModel(title,"city");
+            filterModelList.add(filterModel);
+            filterAdapter.notifyDataSetChanged();
+        }else {
+            FilterModel filterModel = filterModelList.get(pos);
+            filterModel.setTitle(title);
+            filterModelList.set(pos,filterModel);
+            filterAdapter.notifyItemChanged(pos);
+        }
+        binding.llFilter.setVisibility(View.VISIBLE);
+        city_id=id+"";
+
+        closeSheet(3);
+
+    }
+
 }

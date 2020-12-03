@@ -11,15 +11,18 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.doctory_client.R;
 import com.doctory_client.databinding.SliderRowBinding;
+import com.doctory_client.models.Slider_Model;
+import com.doctory_client.tags.Tags;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SliderAdapter extends PagerAdapter {
-    private List<Integer> list ;
+    private List<Slider_Model.Data> list ;
     private Context context;
     private LayoutInflater inflater;
 
-    public SliderAdapter(List<Integer> list, Context context) {
+    public SliderAdapter(List<Slider_Model.Data> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -39,7 +42,7 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.slider_row,container,false);
-        binding.image.setImageResource(list.get(position));
+        Picasso.get().load(Tags.IMAGE_URL+list.get(position));
         container.addView(binding.getRoot());
         return binding.getRoot();
     }
