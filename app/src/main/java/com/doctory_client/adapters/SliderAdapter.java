@@ -1,6 +1,7 @@
 package com.doctory_client.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,10 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.slider_row,container,false);
-        Picasso.get().load(Tags.base_url+list.get(position).getImage());
-        container.addView(binding.getRoot());
+        //Picasso.get().load(Tags.IMAGE_URL+list.get(position).getImage()).into(binding.image);
+
+      Log.e("mmmmmmmmm",Tags.IMAGE_URL+list.get(position).getImage());
+    container.addView(binding.getRoot());
         return binding.getRoot();
     }
 
