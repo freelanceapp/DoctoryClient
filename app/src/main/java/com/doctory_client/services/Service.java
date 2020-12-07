@@ -4,6 +4,7 @@ import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
 import com.doctory_client.models.DiseaseModel;
+import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.NearbyModel;
 import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
@@ -19,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -102,4 +104,16 @@ public interface Service {
     Call<AllCityModel> getcities();
     @GET("api/sliders")
     Call<Slider_Model> get_slider();
+    @GET("api/search-general")
+    Call<DoctorModel> getdoctors(
+            @Query("name") String name,
+            @Query("specialization_id") String specialization_id,
+            @Query("city_id") String city_id,
+            @Query("latitude") String latitude,
+            @Query("longitude") String longitude,
+            @Query("near") String near
+
+
+
+    );
 }

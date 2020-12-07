@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -43,7 +44,8 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.slider_row,container,false);
-        //Picasso.get().load(Tags.IMAGE_URL+list.get(position).getImage()).into(binding.image);
+        Picasso.get().load(Tags.IMAGE_URL+list.get(position).getImage()).resize(720,480).onlyScaleDown()
+                .into(binding.image);
 
       Log.e("mmmmmmmmm",Tags.IMAGE_URL+list.get(position).getImage());
     container.addView(binding.getRoot());

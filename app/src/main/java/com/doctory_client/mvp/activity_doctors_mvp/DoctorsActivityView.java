@@ -2,6 +2,7 @@ package com.doctory_client.mvp.activity_doctors_mvp;
 
 import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.DoctorModel;
 
 public interface DoctorsActivityView {
     void onFinished();
@@ -11,4 +12,5 @@ public interface DoctorsActivityView {
     void onSuccess(AllSpiclixationModel allSpiclixationModel);
     void onSuccesscitie(AllCityModel allCityModel);
 
+    void ondoctorsucess(DoctorModel body);
 }

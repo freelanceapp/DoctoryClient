@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="sliderData"
             type="com.doctory_client.models.Slider_Model.Data" />
@@ -14,5 +13,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        image="@{sliderData.image}"        />
+              />
 </layout>

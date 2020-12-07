@@ -123,6 +123,7 @@ public class Fragment_Home extends Fragment {
 
     private void getSliderData() {
         binding.progBar.setVisibility(View.VISIBLE);
+        binding.flNoAds.setVisibility(View.GONE);
 
         Api.getService(Tags.base_url).get_slider().enqueue(new Callback<Slider_Model>() {
             @Override
@@ -134,11 +135,13 @@ public class Fragment_Home extends Fragment {
                         NUM_PAGES = response.body().getData().size();
                         sliderAdapter = new SliderAdapter( response.body().getData(),activity);
                         binding.pager.setAdapter(sliderAdapter);
+                        binding.flNoAds.setVisibility(View.GONE);
+
 
                     } else {
 
                         binding.pager.setVisibility(View.GONE);
-                        binding.ll.setVisibility(View.VISIBLE);
+                        binding.flNoAds.setVisibility(View.VISIBLE);
                     }
                 } else if (response.code() == 404) {
                     try {

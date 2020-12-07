@@ -6,6 +6,7 @@ import android.util.Log;
 import com.doctory_client.R;
 import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.UserModel;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.remote.Api;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class ActivityDoctorsPresenter {
     private UserModel userModel;
@@ -103,6 +105,44 @@ public class ActivityDoctorsPresenter {
 
                     @Override
                     public void onFailure(Call<AllCityModel> call, Throwable t) {
+                        try {
+                            view.onProgressHide(type);
+                            view.onFailed(context.getString(R.string.something));
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+    }
+
+    public void getdoctors(String name,String specialization_id,String city_id,String latitude,String longitude,String near,int type)
+    {
+        view.onProgressShow(type);
+
+        Api.getService(Tags.base_url)
+                .getdoctors(name,specialization_id,city_id,latitude,longitude,near)
+                .enqueue(new Callback<DoctorModel>() {
+                    @Override
+                    public void onResponse(Call<DoctorModel> call, Response<DoctorModel> response) {
+                        view.onProgressHide(type);
+                        if (response.isSuccessful() && response.body() != null) {
+                            view.ondoctorsucess(response.body());
+                        } else {
+                            view.onProgressHide(type);
+                            view.onFailed(context.getString(R.string.something));
+                            try {
+                                Log.e("error_code",response.code()+  response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<DoctorModel> call, Throwable t) {
                         try {
                             view.onProgressHide(type);
                             view.onFailed(context.getString(R.string.something));
