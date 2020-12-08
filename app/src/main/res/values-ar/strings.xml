@@ -43,7 +43,7 @@
     <string name="skip">تخطى</string>
     <string name="just_now">الان</string>
     <string name="a_minute_ago">منذ د</string>
-    <string name="min">min</string>
+    <string name="min">دقيقة</string>
     <string name="an_hour_ago">منذ س</string>
     <string name="hs">س</string>
     <string name="yesterday">امس</string>
@@ -122,5 +122,10 @@
     <string name="write_your_consultation">إكتب إستشارتك</string>
     <string name="send">إرسال</string>
     <string name="server_error">مشكله فى السيرفر</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="reserved">محجوز</string>
+    <string name="detection_duration">مدة الكشف</string>
+    <string name="reserve_now">احجز الان</string>
 
 </resources>

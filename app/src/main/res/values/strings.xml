@@ -122,4 +122,9 @@
     <string name="write_your_consultation">Write your consultation</string>
     <string name="send">Send</string>
     <string name="server_error">Server Error</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="reserved">Reserved</string>
+    <string name="detection_duration">Detection duration</string>
+    <string name="reserve_now">Reserve now</string>
 </resources>

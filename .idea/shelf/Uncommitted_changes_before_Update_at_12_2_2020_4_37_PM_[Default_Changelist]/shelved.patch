@@ -1,0 +1,69 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"29.0.3\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.doctory_client\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    dataBinding\r\n            {\r\n                enabled true\r\n            }\r\n\r\n    compileOptions {\r\n        sourceCompatibility = 1.8\r\n        targetCompatibility = 1.8\r\n    }\r\n    repositories {\r\n        maven { url \"https://jitpack.io\" }\r\n\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n    implementation 'com.squareup.retrofit2:retrofit:2.6.2'\r\n    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'\r\n    implementation 'com.makeramen:roundedimageview:2.3.0'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    implementation 'io.paperdb:paperdb:2.6'\r\n    implementation 'com.google.android.material:material:1.2.1'\r\n    implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'\r\n    implementation 'com.github.mukeshsolanki:country-picker-android:2.0.1'\r\n    implementation 'com.google.android.gms:play-services-places:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:17.1.0'\r\n    implementation 'com.github.FlyingPumba:SimpleRatingBar:v0.1.5'\r\n    implementation 'de.hdodenhof:circleimageview:3.0.1'\r\n    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'\r\n    implementation 'org.greenrobot:eventbus:3.1.1'\r\n    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'\r\n    implementation 'de.hdodenhof:circleimageview:3.0.1'\r\n    implementation 'com.wdullaer:materialdatetimepicker:3.6.4'\r\n    implementation 'com.google.firebase:firebase-auth:19.4.0'\r\n    implementation 'com.google.firebase:firebase-core:17.5.0'\r\n    implementation 'com.google.firebase:firebase-messaging:20.2.4'\r\n    implementation 'com.chaos.view:pinview:1.4.3'\r\n    implementation 'com.google.maps.android:android-maps-utils:0.5'\r\n    implementation 'com.ethanhua:skeleton:1.1.2'\r\n    implementation 'com.github.ybq:Android-SpinKit:1.4.0'\r\n    implementation 'io.supercharge:shimmerlayout:2.1.0'\r\n    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'\r\n\r\n\r\n\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 4d766d7ed9daf9f726dbe767e8dfef5a7c69e6ce)
++++ app/build.gradle	(date 1605095012049)
+@@ -21,6 +21,7 @@
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
++
+     dataBinding
+             {
+                 enabled true
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1604909917760)
++++ .idea/vcs.xml	(date 1604909917760)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/java/com/doctory_client/ui/activity_splash/SplashActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.doctory_client.ui.activity_splash;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityOptionsCompat;\r\nimport androidx.databinding.DataBindingUtil;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.os.Looper;\r\nimport android.text.Html;\r\nimport android.transition.Transition;\r\nimport android.transition.TransitionSet;\r\nimport android.view.animation.LinearInterpolator;\r\n\r\nimport com.doctory_client.R;\r\nimport com.doctory_client.databinding.ActivitySplashBinding;\r\nimport com.doctory_client.language.Language;\r\nimport com.doctory_client.models.UserSettingsModel;\r\nimport com.doctory_client.mvp.activity_splash_mvp.SplashPresenter;\r\nimport com.doctory_client.mvp.activity_splash_mvp.SplashView;\r\nimport com.doctory_client.preferences.Preferences;\r\nimport com.doctory_client.ui.activity_language.LanguageActivity;\r\nimport com.doctory_client.ui.activity_location.LocationActivity;\r\nimport com.doctory_client.ui.activity_login.LoginActivity;\r\n\r\nimport io.paperdb.Paper;\r\n\r\npublic class SplashActivity extends AppCompatActivity implements SplashView {\r\n    private ActivitySplashBinding binding;\r\n    private SplashPresenter presenter;\r\n    private Preferences preferences;\r\n\r\n\r\n    @Override\r\n    protected void attachBaseContext(Context newBase) {\r\n        Paper.init(newBase);\r\n        super.attachBaseContext(Language.updateResources(newBase,Paper.book().read(\"lang\",\"ar\")));\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {\r\n\r\n            Transition transition = new TransitionSet();\r\n            transition.setInterpolator(new LinearInterpolator());\r\n            transition.setDuration(500);\r\n            getWindow().setEnterTransition(transition);\r\n            getWindow().setExitTransition(transition);\r\n\r\n        }\r\n        binding = DataBindingUtil.setContentView(this,R.layout.activity_splash);\r\n        initView();\r\n    }\r\n\r\n    private void initView() {\r\n        binding.tv.setText(Html.fromHtml(getString(R.string.logo)));\r\n        presenter = new SplashPresenter(this,this);\r\n        preferences = Preferences.getInstance();\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onNavigateToLanguageActivity() {\r\n        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.logo, binding.logo.getTransitionName());\r\n        Intent intent = new Intent(this, LanguageActivity.class);\r\n        startActivityForResult(intent,100,optionsCompat.toBundle());\r\n    }\r\n\r\n    @Override\r\n    public void onNavigateToLocationActivity() {\r\n        Intent intent = new Intent(this, LocationActivity.class);\r\n        startActivity(intent);\r\n        finish();\r\n    }\r\n\r\n\r\n    private void refreshActivity(String lang) {\r\n        new Handler(Looper.getMainLooper()).postDelayed(()->{\r\n            Paper.init(this);\r\n            Paper.book().write(\"lang\",lang);\r\n            Language.updateResources(this,lang);\r\n            UserSettingsModel model = preferences.getUserSettings(this);\r\n            if (preferences.getUserSettings(this)==null){\r\n                model = new UserSettingsModel();\r\n            }\r\n            model.setLanguageSelected(true);\r\n            preferences.create_update_user_settings(this,model);\r\n            Intent intent = getIntent();\r\n            finish();\r\n            startActivity(intent);\r\n        },1500);\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        if (requestCode==100&&resultCode==RESULT_OK&&data!=null){\r\n            String lang = data.getStringExtra(\"lang\");\r\n            refreshActivity(lang);\r\n        }\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/doctory_client/ui/activity_splash/SplashActivity.java	(revision 4d766d7ed9daf9f726dbe767e8dfef5a7c69e6ce)
++++ app/src/main/java/com/doctory_client/ui/activity_splash/SplashActivity.java	(date 1604910698047)
+@@ -66,6 +66,7 @@
+ 
+     @Override
+     public void onNavigateToLanguageActivity() {
++
+         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.logo, binding.logo.getTransitionName());
+         Intent intent = new Intent(this, LanguageActivity.class);
+         startActivityForResult(intent,100,optionsCompat.toBundle());
+Index: app/src/main/java/com/doctory_client/ui/activity_doctor/DoctorActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.doctory_client.ui.activity_doctor;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.databinding.DataBindingUtil;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.graphics.PorterDuff;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\n\r\nimport com.doctory_client.R;\r\nimport com.doctory_client.adapters.DoctorsAdapter;\r\nimport com.doctory_client.databinding.ActivityDoctorBinding;\r\nimport com.doctory_client.language.Language;\r\n\r\nimport java.util.ArrayList;\r\n\r\nimport io.paperdb.Paper;\r\n\r\npublic class DoctorActivity extends AppCompatActivity {\r\n    private ActivityDoctorBinding binding;\r\n    private String lang;\r\n    private double lat=0.0,lng=0.0;\r\n    private DoctorsAdapter adapter;\r\n    @Override\r\n    protected void attachBaseContext(Context newBase) {\r\n        Paper.init(newBase);\r\n        super.attachBaseContext(Language.updateResources(newBase,Paper.book().read(\"lang\",\"ar\")));\r\n    }\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        binding = DataBindingUtil.setContentView(this,R.layout.activity_doctor);\r\n        getDataFromIntent();\r\n        initView();\r\n\r\n    }\r\n\r\n    private void getDataFromIntent() {\r\n        Intent intent = getIntent();\r\n        lat = intent.getDoubleExtra(\"lat\",0.0);\r\n        lng = intent.getDoubleExtra(\"lng\",0.0);\r\n\r\n    }\r\n\r\n    private void initView() {\r\n        Paper.init(this);\r\n        lang = Paper.book().read(\"lang\",\"ar\");\r\n        binding.setLang(lang);\r\n        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);\r\n        binding.recView.setLayoutManager(new LinearLayoutManager(this));\r\n        binding.recView.setAdapter(new DoctorsAdapter(new ArrayList<>(),this));\r\n        binding.progBar.setVisibility(View.GONE);\r\n        binding.llBack.setOnClickListener(view -> finish());\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/doctory_client/ui/activity_doctor/DoctorActivity.java	(revision 4d766d7ed9daf9f726dbe767e8dfef5a7c69e6ce)
++++ app/src/main/java/com/doctory_client/ui/activity_doctor/DoctorActivity.java	(date 1605092537767)
+@@ -54,6 +54,8 @@
+         binding.recView.setLayoutManager(new LinearLayoutManager(this));
+         binding.recView.setAdapter(new DoctorsAdapter(new ArrayList<>(),this));
+         binding.progBar.setVisibility(View.GONE);
+-        binding.llBack.setOnClickListener(view -> finish());
++        binding.llBack.setOnClickListener(view -> {
++            finish();
++        });
+     }
+ }
+\ No newline at end of file

@@ -346,8 +346,9 @@ near="off";
         presenter.getdoctors(query, specialization_id, city_id, lat + "", lng + "", near, 2);
     }
 
-    public void setItemData(DoctorModel doctorModel, DoctorRowBinding binding, int adapterPosition) {
+    public void setItemData(SingleDoctorModel doctorModel, DoctorRowBinding binding, int adapterPosition) {
         Intent intent = new Intent(this, DoctorDetailsActivity.class);
+        intent.putExtra("data",doctorModel);
         List<Pair<View, String>> pairs = new ArrayList<>();
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
                 Pair.create(binding.image, binding.image.getTransitionName()),

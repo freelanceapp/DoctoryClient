@@ -9,6 +9,8 @@ import com.doctory_client.models.NearbyModel;
 import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
+import com.doctory_client.models.ReservisionTimeModel;
+import com.doctory_client.models.SingleDataDoctorModel;
 import com.doctory_client.models.Slider_Model;
 import com.doctory_client.models.UserModel;
 
@@ -112,6 +114,24 @@ public interface Service {
             @Query("latitude") String latitude,
             @Query("longitude") String longitude,
             @Query("near") String near
+
+
+
+    );
+    @GET("api/show-doctor-profile")
+    Call<SingleDataDoctorModel> getsingledoctor(
+            @Query("doctor_id") String doctor_id,
+            @Query("user_id") String user_id
+
+
+            );
+    @GET("api/get-doctor-reservations")
+    Call<ReservisionTimeModel> getreservision(
+            @Query("doctor_id") String doctor_id,
+            @Query("date") String date,
+            @Query("day_name") String day_name,
+            @Query("reservation_type") String reservation_type
+
 
 
 
