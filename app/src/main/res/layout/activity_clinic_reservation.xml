@@ -11,6 +11,7 @@
         <variable
             name="model"
             type="com.doctory_client.models.SingleDoctorModel" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -308,6 +309,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
+                android:visibility='@{model.appointment_time!=null?View.VISIBLE:View.GONE ,default=visible}'
                 android:text='@{@string/detection_duration+model.appointment_time+@string/min}'
                 android:textSize="16sp"
                 android:textColor="@color/black"
@@ -325,6 +327,17 @@
     android:id="@+id/recViewhour"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvNoData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/not_available"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    />
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView

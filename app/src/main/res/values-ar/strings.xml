@@ -127,5 +127,6 @@
     <string name="reserved">محجوز</string>
     <string name="detection_duration">مدة الكشف</string>
     <string name="reserve_now">احجز الان</string>
+    <string name="not_available">Not Available</string>
 
 </resources>

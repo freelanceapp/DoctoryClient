@@ -156,7 +156,12 @@ gettimes();
         singleReservisionTimeModelList.clear();
         singleReservisionTimeModelList.addAll(body.getData());
         reservisionHourAdapter.notifyDataSetChanged();
-
+if(singleReservisionTimeModelList.size()==0){
+    binding.tvNoData.setVisibility(View.VISIBLE);
+}
+else {
+    binding.tvNoData.setVisibility(View.GONE);
+}
     }
 
     public void getchild(int position) {

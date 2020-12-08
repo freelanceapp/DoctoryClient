@@ -127,4 +127,5 @@
     <string name="reserved">Reserved</string>
     <string name="detection_duration">Detection duration</string>
     <string name="reserve_now">Reserve now</string>
+    <string name="not_available">Not Available</string>
 </resources>
