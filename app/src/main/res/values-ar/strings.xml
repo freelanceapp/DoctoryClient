@@ -122,8 +122,8 @@
     <string name="write_your_consultation">إكتب إستشارتك</string>
     <string name="send">إرسال</string>
     <string name="server_error">مشكله فى السيرفر</string>
-    <string name="from">From</string>
-    <string name="to">To</string>
+    <string name="from">من</string>
+    <string name="to">الى</string>
     <string name="reserved">محجوز</string>
     <string name="detection_duration">مدة الكشف</string>
     <string name="reserve_now">احجز الان</string>
