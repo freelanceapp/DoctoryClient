@@ -3,20 +3,35 @@ package com.doctory_client.mvp.activity_home_mvp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.preference.Preference;
+import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import com.doctory_client.R;
 import com.doctory_client.models.UserModel;
 import com.doctory_client.preferences.Preferences;
+import com.doctory_client.remote.Api;
+import com.doctory_client.tags.Tags;
 import com.doctory_client.ui.activity_home.fragments.Fragment_Appointment;
 import com.doctory_client.ui.activity_home.fragments.Fragment_Consulting;
 import com.doctory_client.ui.activity_home.fragments.Fragment_Home;
 import com.doctory_client.ui.activity_home.fragments.Fragment_Medicine;
 import com.doctory_client.ui.activity_home.fragments.Fragment_More;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.androidannotations.annotations.sharedpreferences.Pref;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivityHomePresenter {
     private Context context;
@@ -40,6 +55,9 @@ public class ActivityHomePresenter {
         this.lat = lat;
         this.lng = lng;
         displayFragmentHome();
+        if (userModel!=null){
+          updateToken();
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -212,4 +230,51 @@ public class ActivityHomePresenter {
             view.onHomeFragmentSelected();
         }
     }
+
+    private void updateToken() {
+        FirebaseInstanceId.getInstance()
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                            String token = task.getResult().getToken();
+                            task.getResult().getId();
+                            Log.e("sssssss", token);
+                            Api.getService(Tags.base_url)
+                                    .updateToken( userModel.getData().getId(), token, "android ")
+                                    .enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                                            if (response.isSuccessful()) {
+                                                try {
+                                                    Log.e("Success", "token updated");
+                                                } catch (Exception e) {
+                                                    //  e.printStackTrace();
+                                                }
+                                            } else {
+                                                try {
+                                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            try {
+                                                Log.e("Error", t.getMessage());
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
 }

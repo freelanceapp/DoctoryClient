@@ -3,6 +3,7 @@ package com.doctory_client.services;
 import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.NearbyModel;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -106,6 +108,7 @@ public interface Service {
     Call<AllCityModel> getcities();
     @GET("api/sliders")
     Call<Slider_Model> get_slider();
+
     @GET("api/search-general")
     Call<DoctorModel> getdoctors(
             @Query("name") String name,
@@ -115,8 +118,23 @@ public interface Service {
             @Query("longitude") String longitude,
             @Query("near") String near
 
+    );
+    @GET("api/get-reservations")
+    Call<ApointmentModel> getMyApointment(
+            @Query("pagination_status") String pagination_status,
+            @Query("per_link_") int per_link_,
+            @Query("page") int page,
+            @Query("user_id") int user_id,
+            @Query("reservation_type") String reservation_type
 
+    );
 
+    @FormUrlEncoded
+    @POST("api/firebase-tokens")
+    Call<ResponseBody> updateToken(
+            @Field("user_id") int user_id,
+            @Field("phone_token") String phone_token,
+            @Field("software_type") String software_type
     );
     @GET("api/show-doctor-profile")
     Call<SingleDataDoctorModel> getsingledoctor(
@@ -136,4 +154,5 @@ public interface Service {
 
 
     );
+
 }

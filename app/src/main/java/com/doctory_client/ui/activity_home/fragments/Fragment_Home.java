@@ -1,6 +1,5 @@
 package com.doctory_client.ui.activity_home.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -29,8 +28,6 @@ import com.doctory_client.ui.activity_home.HomeActivity;
 import com.doctory_client.ui.activity_medical_advice.MedicalAdviceActivity;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -133,6 +130,7 @@ public class Fragment_Home extends Fragment {
                 if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                     if (response.body().getData().size() > 0) {
                         NUM_PAGES = response.body().getData().size();
+
                         sliderAdapter = new SliderAdapter( response.body().getData(),activity);
                         binding.pager.setAdapter(sliderAdapter);
                         binding.flNoAds.setVisibility(View.GONE);

@@ -48,7 +48,7 @@ public class SliderAdapter extends PagerAdapter {
                 .into(binding.image);
 
       Log.e("mmmmmmmmm",Tags.IMAGE_URL+list.get(position).getImage());
-    container.addView(binding.getRoot());
+      container.addView(binding.getRoot());
         return binding.getRoot();
     }
 

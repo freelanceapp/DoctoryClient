@@ -149,13 +149,12 @@ public class DoctorActivity extends AppCompatActivity implements DoctorsActivity
                 query = binding.editQuery.getText().toString();
                 if (!TextUtils.isEmpty(query)) {
                     Common.CloseKeyBoard(DoctorActivity.this, binding.editQuery);
-                    presenter.getdoctors(query, specialization_id, city_id,lat+"",lng+"",near,2);
+                    presenter.getdoctors(query, specialization_id, city_id, lat + "", lng + "", near, 2);
                     return false;
+                } else {
+                    query = "";
                 }
-                else {
-                    query="";
-                }
-                presenter.getdoctors(query, specialization_id, city_id,lat+"",lng+"",near,2);
+                presenter.getdoctors(query, specialization_id, city_id, lat + "", lng + "", near, 2);
 
             }
             return false;
@@ -195,9 +194,9 @@ public class DoctorActivity extends AppCompatActivity implements DoctorsActivity
             presenter.getSpecilization(type);
 
         } else if (type == 2) {
-          //  binding.flNearBySheet.clearAnimation();
+            //  binding.flNearBySheet.clearAnimation();
             //binding.flNearBySheet.startAnimation(animation);
-near="off";
+            near = "off";
             int pos = getItemPos("distance");
             String title = getResources().getString(R.string.nearby);
 
@@ -372,8 +371,7 @@ near="off";
         } else if (type == 3) {
             binding.progBarCity.setVisibility(View.VISIBLE);
 
-        }
-        else if (type == 2) {
+        } else if (type == 2) {
             binding.progBar.setVisibility(View.VISIBLE);
 
         }
@@ -386,8 +384,7 @@ near="off";
         } else if (type == 3) {
             binding.progBarCity.setVisibility(View.GONE);
 
-        }
-        else if (type == 2) {
+        } else if (type == 2) {
             binding.progBar.setVisibility(View.GONE);
 
         }
