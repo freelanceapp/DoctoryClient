@@ -355,7 +355,8 @@ public class DoctorActivity extends AppCompatActivity implements DoctorsActivity
                 Pair.create(binding.llAddress, binding.llAddress.getTransitionName()),
                 Pair.create(binding.tvDistance, binding.tvDistance.getTransitionName())
         );
-        startActivity(intent, options.toBundle());
+        startActivityForResult(intent, 1,options.toBundle());
+        finish();
     }
 
     @Override

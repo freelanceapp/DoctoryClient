@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+<variable
+    name="lang"
+    type="String" />
         <variable
             name="model"
             type="com.doctory_client.models.SingleReservisionTimeModel.Detials" />
@@ -72,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
 
-                    android:text='@{model.from.substring(0,model.from.lastIndexOf(":"))}'
+                    android:text='@{model.from.substring(0,model.to.lastIndexOf(":"))+(lang.equals("en")?model.from_hour_type:(model.from_hour_type.equals("AM")?"ص":"م"))}'
                     android:textColor="@color/gray9"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/view1"
@@ -85,8 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:singleLine="true"
-                    android:text='@{model.to.substring(0,model.to.lastIndexOf(":"))}'
+                    android:text='@{model.to.substring(0,model.to.lastIndexOf(":"))+(lang.equals("en")?model.to_hour_type:(model.to_hour_type.equals("AM")?"ص":"م"))}'
+
                     android:textColor="@color/gray9"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"

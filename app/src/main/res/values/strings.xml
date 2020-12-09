@@ -128,4 +128,10 @@
     <string name="detection_duration">Detection duration</string>
     <string name="reserve_now">Reserve now</string>
     <string name="not_available">Not Available in This Day</string>
+    <string name="address">Address</string>
+    <string name="detection_price">Detection price</string>
+    <string name="cash">Cash</string>
+    <string name="pay_online">Pay Online</string>
+    <string name="reservation_confirmation">reservation confirmation</string>
+    <string name="confirm_reservation_and_payment">Confirm reservation and payment</string>
 </resources>

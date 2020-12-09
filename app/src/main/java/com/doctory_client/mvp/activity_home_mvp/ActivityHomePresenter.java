@@ -136,7 +136,7 @@ public class ActivityHomePresenter {
         }
     }
 
-    private void displayFragmentConsulting(){
+    public void displayFragmentConsulting(){
         if (fragment_consulting==null){
             fragment_consulting = Fragment_Consulting.newInstance();
         }

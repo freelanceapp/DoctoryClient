@@ -34,6 +34,7 @@ import com.doctory_client.models.SingleReservisionTimeModel;
 import com.doctory_client.mvp.activity_clinic_reservation_mvp.ActivityClinicReservationPresenter;
 import com.doctory_client.mvp.activity_clinic_reservation_mvp.ActivityClinicReservationView;
 import com.doctory_client.share.Common;
+import com.doctory_client.ui.activity_complete_clinic_reservision.CompleteClinicReservationActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -52,6 +53,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     private String type = "";
     private String date = "";
     private String time = "";
+    private String dayname="";
     private ActivityClinicReservationPresenter presenter;
     private List<SingleReservisionTimeModel> singleReservisionTimeModelList;
     private ReservisionHourAdapter reservisionHourAdapter;
@@ -113,7 +115,6 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         binding.imageBack.setOnClickListener(view -> {
             finish();
         });
-
         binding.llDate.setOnClickListener(view -> presenter.showDateDialog(getFragmentManager()));
 gettimes();
     }
@@ -123,7 +124,8 @@ gettimes();
         String date = dateFormat.format(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("EEE",Locale.ENGLISH);
         String stringDate = sdf.format(System.currentTimeMillis());
-
+        this.date = date;
+this.dayname=stringDate;
         presenter.getreservisiontime(doctorModel,type,date,stringDate.toUpperCase());
     }
 
@@ -131,6 +133,8 @@ gettimes();
     public void onDateSelected(String date,String dayname) {
         this.date = date;
         binding.tvDate.setText(date);
+        this.dayname=dayname;
+
         Log.e("llll",dayname);
         presenter.getreservisiontime(doctorModel,type,date,dayname);
     }
@@ -168,5 +172,15 @@ else {
         detialsList.clear();
         detialsList.addAll(singleReservisionTimeModelList.get(position).getDetials());
         childReservisionHourAdapter.notifyDataSetChanged();
+    }
+
+    public void Setitem(SingleReservisionTimeModel.Detials detials) {
+        Intent intent=new Intent(this, CompleteClinicReservationActivity.class);
+        intent.putExtra("data",doctorModel);
+        intent.putExtra("time",detials);
+        intent.putExtra("dayname",dayname);
+        intent.putExtra("date",date);
+        startActivityForResult(intent,1);
+        finish();
     }
 }

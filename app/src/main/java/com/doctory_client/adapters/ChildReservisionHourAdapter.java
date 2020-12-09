@@ -12,10 +12,14 @@ import com.doctory_client.R;
 import com.doctory_client.databinding.ChildHourReservisionRowBinding;
 import com.doctory_client.databinding.HourRowBinding;
 import com.doctory_client.models.SingleReservisionTimeModel;
+import com.doctory_client.ui.activity_clinic_reservation.ClinicReservationActivity;
 
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class ChildReservisionHourAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final String lang;
     private List<SingleReservisionTimeModel.Detials> list;
     private Context context;
     private LayoutInflater inflater;
@@ -24,7 +28,8 @@ public class ChildReservisionHourAdapter extends RecyclerView.Adapter<RecyclerVi
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-
+        Paper.init(context);
+        lang = Paper.book().read("lang", "ar");
 
     }
 
@@ -41,12 +46,17 @@ public class ChildReservisionHourAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
+
+        myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
-//        myHolder.itemView.setOnClickListener(view -> {
-//            SingleDoctorModel doctorModel = null;
-//             doctorModel = list.get(myHolder.getAdapterPosition());
-//            activity.setItemData(doctorModel,myHolder.binding,myHolder.getAdapterPosition());
-//        });
+        myHolder.itemView.setOnClickListener(view -> {
+            if (context instanceof ClinicReservationActivity) {
+                if (list.get(holder.getLayoutPosition()).getType().equals("not_booked")) {
+                    ClinicReservationActivity clinicReservationActivity = (ClinicReservationActivity) context;
+                    clinicReservationActivity.Setitem(list.get(holder.getLayoutPosition()));
+                }
+            }
+        });
     }
 
     @Override
@@ -65,8 +75,6 @@ public class ChildReservisionHourAdapter extends RecyclerView.Adapter<RecyclerVi
         }
 
     }
-
-
 
 
 }

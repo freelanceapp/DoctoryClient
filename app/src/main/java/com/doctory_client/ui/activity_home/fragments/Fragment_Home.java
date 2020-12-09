@@ -35,6 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class Fragment_Home extends Fragment {
     private FragmentHomeBinding binding;
     private double lat=0.0,lng=0.0;
@@ -112,7 +114,7 @@ public class Fragment_Home extends Fragment {
             Intent intent = new Intent(activity, DoctorActivity.class);
             intent.putExtra("lat",lat);
             intent.putExtra("lng",lng);
-            startActivity(intent);
+            startActivityForResult(intent,1);
         });
 
         getSliderData();
@@ -174,4 +176,12 @@ public class Fragment_Home extends Fragment {
             }
         });
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode==1&&resultCode==RESULT_OK){
+//            activity.displayfragmentconsolt();
+//        }
+//    }
 }

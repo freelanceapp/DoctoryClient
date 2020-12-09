@@ -117,7 +117,8 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
         binding.btnClinicReserve.setOnClickListener(view -> {
             Intent intent = new Intent(this, ClinicReservationActivity.class);
             intent.putExtra("data", doctorModel);
-            startActivity(intent);
+            startActivityForResult(intent,1);
+            finish();
         });
 
         binding.btnConsultationReserve.setOnClickListener(view -> {
