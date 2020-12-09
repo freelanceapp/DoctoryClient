@@ -80,9 +80,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         for (Fragment fragment : fragments) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
-        if(requestCode==1&&resultCode==RESULT_OK){
-            presenter.displayFragmentConsulting();
-        }
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            presenter.displayFragmentAppointment();
+//        }
     }
 
     @Override
@@ -120,9 +120,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     }
 
 
-
     public void displayfragmentconsolt() {
-        presenter.displayFragmentConsulting();
+       // presenter.displayFragmentAppointment();
+        binding.navigationView.setSelectedItemId(binding.navigationView.getMenu().getItem(1).getItemId());
     }
 
 }

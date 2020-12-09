@@ -1,11 +1,13 @@
 package com.doctory_client.ui.activity_doctor_details;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -118,7 +120,7 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
             Intent intent = new Intent(this, ClinicReservationActivity.class);
             intent.putExtra("data", doctorModel);
             startActivityForResult(intent,1);
-            finish();
+
         });
 
         binding.btnConsultationReserve.setOnClickListener(view -> {
@@ -208,6 +210,14 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
         }
         AddMarker(body.getData().getLatitude(), body.getData().getLongitude());
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode== Activity.RESULT_OK){
+            Intent intent=getIntent();
+            setResult(RESULT_OK,intent);
 
+            finish();}
+    }
 
 }

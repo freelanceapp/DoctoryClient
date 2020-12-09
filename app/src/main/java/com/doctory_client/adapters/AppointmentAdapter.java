@@ -15,6 +15,7 @@ import com.doctory_client.R;
 import com.doctory_client.databinding.AppointmentRowBinding;
 import com.doctory_client.databinding.LoadMoreRowBinding;
 import com.doctory_client.databinding.ShopSearchRowBinding;
+import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.NearbyModel;
 import com.doctory_client.ui.activity_google_nearby_places.GoogleNearybyPlacesActivity;
 import com.doctory_client.ui.activity_home.HomeActivity;
@@ -24,12 +25,12 @@ import java.util.List;
 public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int DATA = 1;
     private final int LOAD = 2;
-    private List<Object> list;
+    private List<ApointmentModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
     private AppCompatActivity activity;
 
-    public AppointmentAdapter(List<Object> list, Context context) {
+    public AppointmentAdapter(List<ApointmentModel.Data> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -43,10 +44,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType==DATA){
+        if (viewType == DATA) {
             AppointmentRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.appointment_row, parent, false);
             return new MyHolder(binding);
-        }else {
+        } else {
             LoadMoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more_row, parent, false);
             return new LoadMoreHolder(binding);
         }
@@ -56,16 +57,16 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder){
+        if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
-
+            myHolder.binding.setModel(list.get(position));
 
             myHolder.binding.btnDetails.setOnClickListener(v -> {
 
             });
-        }else if (holder instanceof LoadMoreHolder){
+        } else if (holder instanceof LoadMoreHolder) {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
-            loadMoreHolder.binding.prgBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            loadMoreHolder.binding.prgBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             loadMoreHolder.binding.prgBar.setIndeterminate(true);
         }
 
@@ -102,13 +103,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (list.size()>0){
-            if (list.get(position)==null){
+        if (list.size() > 0) {
+            if (list.get(position) == null) {
                 return LOAD;
-            }else {
+            } else {
                 return DATA;
             }
-        }else {
+        } else {
             return DATA;
 
         }

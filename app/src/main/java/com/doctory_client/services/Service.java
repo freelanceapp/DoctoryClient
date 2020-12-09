@@ -162,11 +162,19 @@ public interface Service {
                                       @Field("time")String time,
                                       @Field("cost")String cost,
                                       @Field("reservation_type")String reservation_type,
-                                      @Field("day_name")String day_name
+                                      @Field("day_name")String day_name,
+                                      @Field("time_type")String time_type
+
 
 
 
 
     );
+    @GET("api/get_diseases_by_specializations")
+    Call<AllDiseasesModel> getdiseasbyspicial(
+            @Query("specialization_id") int specialization_id
+
+    );
+
 
 }

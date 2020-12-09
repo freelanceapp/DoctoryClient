@@ -109,7 +109,7 @@ public class ActivityHomePresenter {
         }
     }
 
-    private void displayFragmentAppointment(){
+    public void displayFragmentAppointment(){
         if (fragment_appointment==null){
             fragment_appointment = Fragment_Appointment.newInstance();
         }
@@ -134,6 +134,7 @@ public class ActivityHomePresenter {
         }else {
             fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_appointment,"fragment_appointment").commit();
         }
+
     }
 
     public void displayFragmentConsulting(){

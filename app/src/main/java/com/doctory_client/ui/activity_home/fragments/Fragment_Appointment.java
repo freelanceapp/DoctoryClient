@@ -60,7 +60,7 @@ public class Fragment_Appointment extends Fragment implements ApointmentFragment
         presenter = new ApointmentPresenter(this,activity);
         presenter.getApointment(userModel);*/
 
-        adapter = new AppointmentAdapter(new ArrayList<>(), activity);
+        adapter = new AppointmentAdapter(apointmentModelList, activity);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(adapter);

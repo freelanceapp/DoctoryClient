@@ -1,5 +1,6 @@
 package com.doctory_client.ui.activity_clinic_reservation;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -53,7 +55,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     private String type = "";
     private String date = "";
     private String time = "";
-    private String dayname="";
+    private String dayname = "";
     private ActivityClinicReservationPresenter presenter;
     private List<SingleReservisionTimeModel> singleReservisionTimeModelList;
     private ReservisionHourAdapter reservisionHourAdapter;
@@ -84,15 +86,15 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
 
     private void initView() {
         singleReservisionTimeModelList = new ArrayList<>();
-        detialsList=new ArrayList<>();
+        detialsList = new ArrayList<>();
 
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
         presenter = new ActivityClinicReservationPresenter(this, this);
         reservisionHourAdapter = new ReservisionHourAdapter(singleReservisionTimeModelList, this);
-        childReservisionHourAdapter=new ChildReservisionHourAdapter(detialsList,this);
-        binding.recViewhour.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        childReservisionHourAdapter = new ChildReservisionHourAdapter(detialsList, this);
+        binding.recViewhour.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         binding.recViewhour.setAdapter(reservisionHourAdapter);
         binding.recViewchildhour.setLayoutManager(new GridLayoutManager(this, 3));
         binding.recViewchildhour.setAdapter(childReservisionHourAdapter);
@@ -116,28 +118,29 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
             finish();
         });
         binding.llDate.setOnClickListener(view -> presenter.showDateDialog(getFragmentManager()));
-gettimes();
+        gettimes();
     }
 
     private void gettimes() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         String date = dateFormat.format(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE",Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.ENGLISH);
         String stringDate = sdf.format(System.currentTimeMillis());
         this.date = date;
-this.dayname=stringDate;
-        presenter.getreservisiontime(doctorModel,type,date,stringDate.toUpperCase());
+        this.dayname = stringDate;
+        presenter.getreservisiontime(doctorModel, type, date, stringDate.toUpperCase());
     }
 
     @Override
-    public void onDateSelected(String date,String dayname) {
+    public void onDateSelected(String date, String dayname) {
         this.date = date;
         binding.tvDate.setText(date);
-        this.dayname=dayname;
+        this.dayname = dayname;
 
-        Log.e("llll",dayname);
-        presenter.getreservisiontime(doctorModel,type,date,dayname);
+        Log.e("llll", dayname);
+        presenter.getreservisiontime(doctorModel, type, date, dayname);
     }
+
     @Override
     public void onLoad() {
         dialog2 = Common.createProgressDialog(this, getString(R.string.wait));
@@ -160,12 +163,11 @@ this.dayname=stringDate;
         singleReservisionTimeModelList.clear();
         singleReservisionTimeModelList.addAll(body.getData());
         reservisionHourAdapter.notifyDataSetChanged();
-if(singleReservisionTimeModelList.size()==0){
-    binding.tvNoData.setVisibility(View.VISIBLE);
-}
-else {
-    binding.tvNoData.setVisibility(View.GONE);
-}
+        if (singleReservisionTimeModelList.size() == 0) {
+            binding.tvNoData.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvNoData.setVisibility(View.GONE);
+        }
     }
 
     public void getchild(int position) {
@@ -175,12 +177,23 @@ else {
     }
 
     public void Setitem(SingleReservisionTimeModel.Detials detials) {
-        Intent intent=new Intent(this, CompleteClinicReservationActivity.class);
-        intent.putExtra("data",doctorModel);
-        intent.putExtra("time",detials);
-        intent.putExtra("dayname",dayname);
-        intent.putExtra("date",date);
-        startActivityForResult(intent,1);
-        finish();
+        Intent intent = new Intent(this, CompleteClinicReservationActivity.class);
+        intent.putExtra("data", doctorModel);
+        intent.putExtra("time", detials);
+        intent.putExtra("dayname", dayname);
+        intent.putExtra("date", date);
+        startActivityForResult(intent, 1);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Intent intent = getIntent();
+            setResult(RESULT_OK, intent);
+
+            finish();
+        }
     }
 }

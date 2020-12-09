@@ -1,11 +1,13 @@
 package com.doctory_client.ui.activity_doctor;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -356,14 +358,21 @@ public class DoctorActivity extends AppCompatActivity implements DoctorsActivity
                 Pair.create(binding.tvDistance, binding.tvDistance.getTransitionName())
         );
         startActivityForResult(intent, 1,options.toBundle());
-        finish();
     }
 
     @Override
     public void onFinished() {
         finish();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode== Activity.RESULT_OK){
+            Intent intent=getIntent();
+            setResult(RESULT_OK,intent);
 
+            finish();}
+    }
 
     @Override
     public void onProgressShow(int type) {
