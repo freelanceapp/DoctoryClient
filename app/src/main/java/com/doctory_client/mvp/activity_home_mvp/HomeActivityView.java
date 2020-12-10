@@ -4,4 +4,13 @@ public interface HomeActivityView {
     void onHomeFragmentSelected();
     void onNavigateToLoginActivity();
     void onFinished();
+    void onLoad();
+
+    void onFinishload();
+
+    void onFailed(String msg);
+
+    void logout();
+
+    void notlogin();
 }

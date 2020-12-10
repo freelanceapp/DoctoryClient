@@ -8,6 +8,7 @@ import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.NearbyModel;
+import com.doctory_client.models.NotificationModel;
 import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
@@ -67,6 +68,9 @@ public interface Service {
     Call<UserModel> login(@Field("phone_code") String phone_code,
                           @Field("phone") String phone
 
+    );
+    @POST("api/logout")
+    Call<ResponseBody> logout(@Header("Authorization") String user_token
     );
     @GET("api/get-diseases")
     Call<AllDiseasesModel> getdiseas();
@@ -187,4 +191,26 @@ public interface Service {
     @GET("api/get-available-doctors")
     Call<DoctorModel> getdoctors(
             );
+    @FormUrlEncoded
+    @POST("api/add-reservations")
+    Call<ResponseBody> changereservision(@Field("user_id") String user_id,
+                                      @Field("doctor_id") String doctor_id,
+                                      @Field("date") String date,
+                                      @Field("time")String time,
+                                      @Field("cost")String cost,
+                                      @Field("reservation_type")String reservation_type,
+                                      @Field("day_name")String day_name,
+                                      @Field("time_type")String time_type
+
+
+
+
+
+    );
+    @GET("api/get-my-notifications")
+    Call<NotificationModel> getnotification(
+            @Query("user_id") String user_id
+
+
+    );
 }

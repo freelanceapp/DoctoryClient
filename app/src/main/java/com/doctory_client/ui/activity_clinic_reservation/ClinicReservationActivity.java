@@ -29,6 +29,7 @@ import com.doctory_client.adapters.ReservisionHourAdapter;
 import com.doctory_client.databinding.ActivityClinicReservationBinding;
 import com.doctory_client.databinding.ActivityDoctorDetailsBinding;
 import com.doctory_client.language.Language;
+import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.DoctorModel;
 import com.doctory_client.models.ReservisionTimeModel;
 import com.doctory_client.models.SingleDoctorModel;
@@ -52,6 +53,8 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     private String lang;
     private ActivityClinicReservationBinding binding;
     private SingleDoctorModel doctorModel;
+    private ApointmentModel.Data apointmentModel;
+
     private String type = "";
     private String date = "";
     private String time = "";
@@ -80,8 +83,11 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        doctorModel = (SingleDoctorModel) intent.getSerializableExtra("data");
-
+        if (intent.getSerializableExtra("data") != null) {
+            doctorModel = (SingleDoctorModel) intent.getSerializableExtra("data");
+        } else {
+            apointmentModel = (ApointmentModel.Data) intent.getSerializableExtra("DATA");
+        }
     }
 
     private void initView() {
@@ -128,7 +134,11 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         String stringDate = sdf.format(System.currentTimeMillis());
         this.date = date;
         this.dayname = stringDate;
-        presenter.getreservisiontime(doctorModel, type, date, stringDate.toUpperCase());
+        if (doctorModel != null) {
+            presenter.getreservisiontime(doctorModel, type, date, stringDate.toUpperCase());
+        } else {
+            presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, stringDate.toUpperCase());
+        }
     }
 
     @Override
@@ -138,7 +148,12 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         this.dayname = dayname;
 
         Log.e("llll", dayname);
-        presenter.getreservisiontime(doctorModel, type, date, dayname);
+        if (doctorModel != null) {
+            presenter.getreservisiontime(doctorModel, type, date, dayname);
+        } else {
+            presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, dayname);
+
+        }
     }
 
     @Override
@@ -177,8 +192,14 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     }
 
     public void Setitem(SingleReservisionTimeModel.Detials detials) {
-        Intent intent = new Intent(this, CompleteClinicReservationActivity.class);
-        intent.putExtra("data", doctorModel);
+        Intent intent = new Intent(this, ClinicReservationActivity.class);
+        if (doctorModel != null) {
+            intent.putExtra("data", doctorModel);
+            intent.putExtra("type", 0);
+        } else {
+            intent.putExtra("type", apointmentModel.getId());
+            intent.putExtra("data", apointmentModel.getDoctor_fk());
+        }
         intent.putExtra("time", detials);
         intent.putExtra("dayname", dayname);
         intent.putExtra("date", date);

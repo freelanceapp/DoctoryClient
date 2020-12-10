@@ -40,7 +40,7 @@ public class Fragment_Consulting extends Fragment {
         activity = (HomeActivity) getActivity();
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recView.setAdapter(new AppointmentAdapter(new ArrayList<>(),activity));
+       // binding.recView.setAdapter(new AppointmentAdapter(new ArrayList<>(),activity));
         binding.progBar.setVisibility(View.GONE);
     }
 }

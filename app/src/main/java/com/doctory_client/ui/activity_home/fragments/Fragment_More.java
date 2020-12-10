@@ -38,5 +38,11 @@ public class Fragment_More extends Fragment {
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
         binding.setLang(lang);
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.Logout();
+            }
+        });
     }
 }

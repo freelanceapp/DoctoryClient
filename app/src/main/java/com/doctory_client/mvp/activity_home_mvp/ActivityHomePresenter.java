@@ -277,5 +277,49 @@ public class ActivityHomePresenter {
                     }
                 });
     }
+    public void logout(UserModel userModel) {
+        if (userModel != null) {
+            view.onLoad();
+Log.e("dkdk","Bearer " + userModel.getData().getToken());
+            Api.getService(Tags.base_url)
+                    .logout("Bearer " + userModel.getData().getToken())
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            view.onFinishload();
+                            if (response.isSuccessful() && response.body() != null) {
+                                view.logout();
+                            } else {
+                                view.onFinishload();
+                                view.onFailed(context.getString(R.string.something));
+                                try {
+                                    Log.e("error_codess", response.code() + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+                                view.onFinishload();
+                                view.onFailed(context.getString(R.string.something));
+                                Log.e("Error", t.getMessage());
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    });
+        }
+        else {
+            view.notlogin();
+        }
+    }
+
+    public void notlogin() {
+        view.notlogin();
+    }
 }

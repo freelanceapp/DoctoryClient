@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
 
-                    android:text='@{model.from.substring(0,model.to.lastIndexOf(":"))+(lang.equals("en")?model.from_hour_type:(model.from_hour_type.equals("AM")?"ص":"م"))}'
+                    android:text='@{model.from.substring(0,model.from.lastIndexOf(":"))+(lang.equals("en")?model.from_hour_type:(model.from_hour_type.equals("AM")?"ص":"م"))}'
                     android:textColor="@color/gray9"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/view1"

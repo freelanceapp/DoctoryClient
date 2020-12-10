@@ -1,5 +1,6 @@
 package com.doctory_client.ui.activity_home.fragments;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.doctory_client.mvp.fragment_apointment_mvp.ApointmentFragmentView;
 import com.doctory_client.mvp.fragment_apointment_mvp.ApointmentPresenter;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.ui.activity_home.HomeActivity;
+import com.doctory_client.ui.activity_reservision_detials.ReservationDetialsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ public class Fragment_Appointment extends Fragment implements ApointmentFragment
         presenter = new ApointmentPresenter(this,activity);
         presenter.getApointment(userModel);*/
 
-        adapter = new AppointmentAdapter(apointmentModelList, activity);
+        adapter = new AppointmentAdapter(apointmentModelList, activity,this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(adapter);
@@ -92,5 +94,10 @@ public class Fragment_Appointment extends Fragment implements ApointmentFragment
     public void hideProgressBar() {
         binding.progBar.setVisibility(View.GONE);
 
+    }
+    public void showdetails(ApointmentModel.Data data) {
+        Intent intent=new Intent(activity, ReservationDetialsActivity.class);
+        intent.putExtra("data",data);
+        startActivity(intent);
     }
 }

@@ -134,5 +134,8 @@
     <string name="pay_online">دفع اونلاين</string>
     <string name="reservation_confirmation">تأكيد الحجز</string>
     <string name="confirm_reservation_and_payment">تاكيد الحجز والدفع</string>
+    <string name="cancel_reservision">الغاء الحجز</string>
+    <string name="set_another_appointment">حدد ميعاد اخر</string>
+    <string name="not_notification_to_show">لا يوجد اشعارات لعرضها</string>
 
 </resources>

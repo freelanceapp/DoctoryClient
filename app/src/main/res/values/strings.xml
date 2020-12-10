@@ -134,4 +134,7 @@
     <string name="pay_online">Pay Online</string>
     <string name="reservation_confirmation">reservation confirmation</string>
     <string name="confirm_reservation_and_payment">Confirm reservation and payment</string>
+    <string name="cancel_reservision">Cancel Reservision</string>
+    <string name="set_another_appointment">Set another appointment</string>
+    <string name="not_notification_to_show">Not Notification To Show</string>
 </resources>

@@ -1,8 +1,9 @@
 package com.doctory_client.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ApointmentModel {
+public class ApointmentModel implements Serializable{
 
     private List<Data> data;
 
@@ -10,9 +11,10 @@ public class ApointmentModel {
         return data;
     }
 
-    public class Data {
+    public class Data implements Serializable {
         public int id;
         public int user_id;
+        private String time_type;
         public String patient_name;
         public String patient_phone;
         public int doctor_id;
@@ -24,7 +26,7 @@ public class ApointmentModel {
         public Object cancel_reason;
         public String day_name;
         public PatientFk patient_fk;
-        public DoctorFk doctor_fk;
+        public SingleDoctorModel doctor_fk;
 
 
         public int getId() {
@@ -33,6 +35,10 @@ public class ApointmentModel {
 
         public int getUser_id() {
             return user_id;
+        }
+
+        public String getTime_type() {
+            return time_type;
         }
 
         public String getPatient_name() {
@@ -79,11 +85,11 @@ public class ApointmentModel {
             return patient_fk;
         }
 
-        public DoctorFk getDoctor_fk() {
+        public SingleDoctorModel getDoctor_fk() {
             return doctor_fk;
         }
 
-        public class PatientFk{
+        public class PatientFk implements Serializable{
             public int id;
             public String code;
             public String user_type;
@@ -264,68 +270,6 @@ public class ApointmentModel {
         }
 
 
-        public class DoctorFk{
-            public int id;
-            public String code;
-            public String user_type;
-            public String name;
-            public String email;
-            public String phone_code;
-            public long phone;
-            public String gender;
-            public String address;
-            public double latitude;
-            public double longitude;
-            public int specialization_id;
-            public int job_degree_id;
-            public int city_id;
-            public String license_img;
-            public String logo;
-            public Object banner;
-            public Object birth_day;
-            public Object blood_type;
-            public Object details;
-            public int rates;
-            public int app_cost;
-            public int detection_price;
-            public Object appointment_time;
-            public String is_emergency;
-            public Object email_verified_at;
-            public String is_blocked;
-            public String is_login;
-            public Object logout_time;
-            public int is_confirmed;
-            public Object confirmation_code;
-            public Object forget_password_code;
-            public String software_type;
-            public Object deleted_at;
-
-            public int distance;
-            public SpecializationFk specialization_fk;
-
-            public class SpecializationFk{
-                public int id;
-                public String title;
-                public String image;
-                public Object created_at;
-
-                public int getId() {
-                    return id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-
-                public String getImage() {
-                    return image;
-                }
-
-                public Object getCreated_at() {
-                    return created_at;
-                }
-            }
-        }
 
     }
 

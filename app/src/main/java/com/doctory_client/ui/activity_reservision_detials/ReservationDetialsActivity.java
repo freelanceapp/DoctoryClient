@@ -1,54 +1,40 @@
-package com.doctory_client.ui.activity_complete_clinic_reservision;
+package com.doctory_client.ui.activity_reservision_detials;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.doctory_client.R;
-import com.doctory_client.adapters.ChildReservisionHourAdapter;
-import com.doctory_client.adapters.ReservisionHourAdapter;
-import com.doctory_client.databinding.ActivityClinicReservationBinding;
 import com.doctory_client.databinding.ActivityCompleteClinicReservisionBinding;
+import com.doctory_client.databinding.ActivityReservisionDetialsBinding;
 import com.doctory_client.language.Language;
-import com.doctory_client.models.ReservisionTimeModel;
+import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.SingleDoctorModel;
 import com.doctory_client.models.SingleReservisionTimeModel;
 import com.doctory_client.models.UserModel;
-import com.doctory_client.mvp.activity_clinic_reservation_mvp.ActivityClinicReservationPresenter;
-import com.doctory_client.mvp.activity_clinic_reservation_mvp.ActivityClinicReservationView;
 import com.doctory_client.mvp.activity_complete_clinic_reservision.ActivityCompleteClinicReservationPresenter;
 import com.doctory_client.mvp.activity_complete_clinic_reservision.ActivityCompleteClinicReservationView;
+import com.doctory_client.mvp.actvity_reservision_detials_mvp.ActivityReservationDetialsPresenter;
+import com.doctory_client.mvp.actvity_reservision_detials_mvp.ActivityReservationDetialsView;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.share.Common;
-import com.doctory_client.ui.activity_home.HomeActivity;
-import com.doctory_client.ui.activity_sign_up.SignUpActivity;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import com.doctory_client.ui.activity_clinic_reservation.ClinicReservationActivity;
 
 import io.paperdb.Paper;
 
-public class CompleteClinicReservationActivity extends AppCompatActivity implements ActivityCompleteClinicReservationView {
+public class ReservationDetialsActivity extends AppCompatActivity implements ActivityReservationDetialsView {
     private String lang;
-    private ActivityCompleteClinicReservisionBinding binding;
-    private SingleDoctorModel doctorModel;
-    private String date = "";
-    private String dayname = "";
-    private int type;
-    private ActivityCompleteClinicReservationPresenter presenter;
-    SingleReservisionTimeModel.Detials singletimemodel;
+    private ActivityReservisionDetialsBinding binding;
+    private ApointmentModel.Data apointmentModel;
+
+    private ActivityReservationDetialsPresenter presenter;
+
     private ProgressDialog dialog2;
     private UserModel usermodel;
     private Preferences preferences;
@@ -62,7 +48,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_complete_clinic_reservision);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_reservision_detials);
         getDataFromIntent();
         initView();
 
@@ -70,11 +56,8 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        doctorModel = (SingleDoctorModel) intent.getSerializableExtra("data");
-        singletimemodel = (SingleReservisionTimeModel.Detials) intent.getSerializableExtra("time");
-        date = intent.getStringExtra("date");
-        dayname = intent.getStringExtra("dayname");
-        type=intent.getIntExtra("type",0);
+        apointmentModel = (ApointmentModel.Data) intent.getSerializableExtra("data");
+
     }
 
     private void initView() {
@@ -84,24 +67,22 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
-        binding.setDate(date);
-        binding.setModel(doctorModel);
-        binding.setTimemodel(singletimemodel);
-        presenter = new ActivityCompleteClinicReservationPresenter(this, this);
+
+        binding.setModel(apointmentModel);
+        presenter = new ActivityReservationDetialsPresenter(this, this);
 
 
         binding.llBack.setOnClickListener(view -> {
             finish();
         });
-        binding.btnConsultationReserve.setOnClickListener(new View.OnClickListener() {
+        binding.btncahngeresev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(type==0) {
-                    presenter.addresrevision(usermodel, doctorModel, singletimemodel, date, dayname);
-                }
-                else {
+                Intent intent=new Intent(ReservationDetialsActivity.this, ClinicReservationActivity.class);
+                intent.putExtra("DATA",apointmentModel);
+                startActivity(intent);
+              //  presenter.addresrevision(usermodel, doctorModel, singletimemodel, date, dayname);
 
-                }
             }
         });
 
@@ -136,7 +117,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
 
     @Override
     public void onServer() {
-        Toast.makeText(CompleteClinicReservationActivity.this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReservationDetialsActivity.this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -150,12 +131,12 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
 
     @Override
     public void onFailed() {
-        Toast.makeText(CompleteClinicReservationActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReservationDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onnotconnect(String msg) {
-        Toast.makeText(CompleteClinicReservationActivity.this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReservationDetialsActivity.this, msg, Toast.LENGTH_SHORT).show();
 
     }
 }
