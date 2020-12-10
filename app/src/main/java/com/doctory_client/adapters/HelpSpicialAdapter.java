@@ -23,7 +23,7 @@ public class HelpSpicialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private List<SpecializationModel> list;
     private Context context;
     private LayoutInflater inflater;
-private int i=-1;
+private int i=0;
     public HelpSpicialAdapter(List<SpecializationModel> list, Context context) {
         this.list = list;
         this.context = context;
@@ -53,14 +53,17 @@ myHolder.itemView.setOnClickListener(new
                                              View.OnClickListener() {
                                                  @Override
                                                  public void onClick(View view) {
-                                              if(context instanceof MedicalAdviceActivity){
-                                                  MedicalAdviceActivity medicalAdviceActivity=(MedicalAdviceActivity) context;
-                                                  medicalAdviceActivity.onshowdisease(list.get(position));
-                                              }
+                                             i=position;
+                                             notifyDataSetChanged();
 
                                                  }
                                              });
-
+if(position==i){
+    if(context instanceof MedicalAdviceActivity){
+        MedicalAdviceActivity medicalAdviceActivity=(MedicalAdviceActivity) context;
+        medicalAdviceActivity.onshowdisease(list.get(position));
+    }
+}
 
 
     }

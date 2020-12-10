@@ -1,5 +1,6 @@
 package com.doctory_client.services;
 
+import com.doctory_client.models.AllAdviceModel;
 import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
@@ -11,6 +12,7 @@ import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
 import com.doctory_client.models.ReservisionTimeModel;
+import com.doctory_client.models.SingleAdviceModel;
 import com.doctory_client.models.SingleDataDoctorModel;
 import com.doctory_client.models.Slider_Model;
 import com.doctory_client.models.UserModel;
@@ -170,11 +172,19 @@ public interface Service {
 
 
     );
-    @GET("api/get_diseases_by_specializations")
+    @GET("api/get-diseases-by-specializations")
     Call<AllDiseasesModel> getdiseasbyspicial(
             @Query("specialization_id") int specialization_id
 
     );
+    @GET("api/get-blogs")
+    Call<AllAdviceModel> getadvice(
+            @Query("specialization_id") String specialization_id,
+            @Query("disease_id") String disease_id
 
 
+    );
+    @GET("api/get-available-doctors")
+    Call<DoctorModel> getdoctors(
+            );
 }

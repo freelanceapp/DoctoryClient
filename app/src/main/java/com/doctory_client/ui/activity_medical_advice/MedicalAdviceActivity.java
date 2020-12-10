@@ -6,9 +6,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,10 +24,12 @@ import com.doctory_client.language.Language;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
 import com.doctory_client.models.DiseaseModel;
+import com.doctory_client.models.SingleAdviceModel;
 import com.doctory_client.models.SpecializationModel;
 import com.doctory_client.mvp.activity_doctors_mvp.ActivityDoctorsPresenter;
 import com.doctory_client.mvp.activity_medical_advice_mvp.ActivityMedicalAdvicePresenter;
 import com.doctory_client.mvp.activity_medical_advice_mvp.MedicalAdviceActivityView;
+import com.doctory_client.share.Common;
 import com.doctory_client.ui.activity_doctor.DoctorActivity;
 
 import java.util.ArrayList;
@@ -41,6 +45,8 @@ public class MedicalAdviceActivity extends AppCompatActivity implements MedicalA
     private HelpSpicialAdapter spicialAdapter;
     private List<DiseaseModel> diseaseModelList;
     private HelpDisseasAdapter helpDisseasAdapter;
+    private ProgressDialog dialog2;
+    private SpecializationModel specializationModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -119,7 +125,34 @@ public class MedicalAdviceActivity extends AppCompatActivity implements MedicalA
         helpDisseasAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void advicesucess(SingleAdviceModel body) {
+
+        binding.setModel(body);
+    }
+
+    @Override
+    public void onnodata() {
+        binding.llData.setVisibility(View.GONE);
+    }
+
     public void onshowdisease(SpecializationModel specializationModel) {
+        this.specializationModel=specializationModel;
         presenter.getdisease(2, specializationModel.getId());
+    }
+    @Override
+    public void onLoad() {
+        dialog2 = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog2.setCancelable(false);
+        dialog2.show();
+    }
+
+    @Override
+    public void onFinishload() {
+        dialog2.dismiss();
+    }
+
+    public void getadvice(DiseaseModel diseaseModel) {
+        presenter.getAdvice(diseaseModel,specializationModel);
     }
 }

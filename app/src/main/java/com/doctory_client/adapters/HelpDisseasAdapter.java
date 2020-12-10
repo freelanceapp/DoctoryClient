@@ -2,6 +2,7 @@ package com.doctory_client.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import com.doctory_client.databinding.HelpDissesRowBinding;
 import com.doctory_client.databinding.HelpSplezationRowBinding;
 import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.SpecializationModel;
+import com.doctory_client.ui.activity_medical_advice.MedicalAdviceActivity;
 
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class HelpDisseasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private List<DiseaseModel> list;
     private Context context;
     private LayoutInflater inflater;
-private int i=-1;
+    private int i = 0;
+
     public HelpDisseasAdapter(List<DiseaseModel> list, Context context) {
         this.list = list;
         this.context = context;
@@ -47,18 +50,28 @@ private int i=-1;
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
 
-//myHolder.itemView.setOnClickListener(new
-//                                             View.OnClickListener() {
-//                                                 @Override
-//                                                 public void onClick(View view) {
-//                                                     i=position;
-//                                                     activity.setspicialization(list.get(i).getId());
-//
-//                                                     notifyDataSetChanged();
-//                                                 }
-//                                             });
+        myHolder.itemView.setOnClickListener(new
+                                                     View.OnClickListener() {
+                                                         @Override
+                                                         public void onClick(View view) {
+                                                             i = position;
+                                                             notifyDataSetChanged();
+                                                         }
+                                                     });
+        if (i == position) {
+            ((MyHolder) holder).binding.card.setCardBackgroundColor(context.getResources().getColor(R.color.color1));
+            ((MyHolder) holder).binding.tv.setTextColor(context.getResources().getColor(R.color.white));
+            if (context instanceof MedicalAdviceActivity) {
+                MedicalAdviceActivity medicalAdviceActivity = (MedicalAdviceActivity) context;
+                medicalAdviceActivity.getadvice(list.get(position));
 
+            }
 
+        } else {
+            ((MyHolder) holder).binding.card.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+            ((MyHolder) holder).binding.tv.setTextColor(context.getResources().getColor(R.color.black));
+
+        }
 
     }
 
@@ -76,8 +89,6 @@ private int i=-1;
 
         }
     }
-
-
 
 
 }

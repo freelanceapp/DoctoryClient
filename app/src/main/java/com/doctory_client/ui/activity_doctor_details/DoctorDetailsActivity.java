@@ -21,13 +21,9 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
 import com.doctory_client.R;
-import com.doctory_client.adapters.DoctorsAdapter;
-import com.doctory_client.adapters.FilterAdapter;
 import com.doctory_client.adapters.RateAdapter;
 import com.doctory_client.databinding.ActivityDoctorDetailsBinding;
 import com.doctory_client.language.Language;
-import com.doctory_client.models.DoctorModel;
-import com.doctory_client.models.FilterModel;
 import com.doctory_client.models.SingleDataDoctorModel;
 import com.doctory_client.models.SingleDoctorModel;
 import com.doctory_client.models.UserModel;
@@ -45,9 +41,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.warkiz.widget.IndicatorSeekBar;
-import com.warkiz.widget.OnSeekChangeListener;
-import com.warkiz.widget.SeekParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,9 +100,9 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
         binding.setLang(lang);
         presenter = new ActivityDoctorDetialsPresenter(this, this);
         if (userModel != null) {
-            presenter.getSpecilization(doctorModel, userModel.getData().getId() + "");
+            presenter.getDoctorDtials(doctorModel, userModel.getData().getId() + "");
         } else {
-            presenter.getSpecilization(doctorModel, "");
+            presenter.getDoctorDtials(doctorModel, "");
 
         }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);

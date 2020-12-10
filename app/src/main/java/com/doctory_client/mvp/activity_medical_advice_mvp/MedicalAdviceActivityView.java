@@ -4,6 +4,7 @@ import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
 import com.doctory_client.models.DoctorModel;
+import com.doctory_client.models.SingleAdviceModel;
 
 public interface MedicalAdviceActivityView {
     void onFinished();
@@ -11,6 +12,11 @@ public interface MedicalAdviceActivityView {
     void onProgressHide(int type);
     void onFailed(String msg);
     void onSuccess(AllSpiclixationModel allSpiclixationModel);
-
+    void onLoad();
+    void onFinishload();
     void ondiseasesuc(AllDiseasesModel body);
+
+    void advicesucess(SingleAdviceModel body);
+
+    void onnodata();
 }

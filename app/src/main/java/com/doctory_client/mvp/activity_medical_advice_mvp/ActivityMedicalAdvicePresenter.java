@@ -4,10 +4,16 @@ import android.content.Context;
 import android.util.Log;
 
 import com.doctory_client.R;
+import com.doctory_client.models.AllAdviceModel;
 import com.doctory_client.models.AllCityModel;
 import com.doctory_client.models.AllDiseasesModel;
 import com.doctory_client.models.AllSpiclixationModel;
+import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.DoctorModel;
+import com.doctory_client.models.SingleAdviceModel;
+import com.doctory_client.models.SingleDataDoctorModel;
+import com.doctory_client.models.SingleDoctorModel;
+import com.doctory_client.models.SpecializationModel;
 import com.doctory_client.models.UserModel;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.remote.Api;
@@ -107,6 +113,48 @@ public class ActivityMedicalAdvicePresenter {
                     public void onFailure(Call<AllDiseasesModel> call, Throwable t) {
                         try {
                             view.onProgressHide(type);
+                            view.onFailed(context.getString(R.string.something));
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+    }
+    public void getAdvice(DiseaseModel diseaseModel, SpecializationModel specializationModel)
+    {
+        view.onLoad();
+
+        Api.getService(Tags.base_url)
+                .getadvice(specializationModel.getId()+"",diseaseModel.getId()+"")
+                .enqueue(new Callback<AllAdviceModel>() {
+                    @Override
+                    public void onResponse(Call<AllAdviceModel> call, Response<AllAdviceModel> response) {
+                        view.onFinishload();
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            if(response.body().getData().size()>0){
+                            view.advicesucess(response.body().getData().get(0));}
+                            else {
+                                view.onnodata();
+                            }
+                        } else {
+                            view.onFinishload();
+                            view.onFailed(context.getString(R.string.something));
+                            try {
+                                Log.e("error_codess",response.code()+ response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<AllAdviceModel> call, Throwable t) {
+                        try {
+                            view.onFinishload();
                             view.onFailed(context.getString(R.string.something));
                             Log.e("Error", t.getMessage());
                         } catch (Exception e) {

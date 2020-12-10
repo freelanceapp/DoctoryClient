@@ -15,16 +15,18 @@ import com.doctory_client.R;
 import com.doctory_client.databinding.AppointmentRowBinding;
 import com.doctory_client.databinding.EmergencyDoctorRowBinding;
 import com.doctory_client.databinding.LoadMoreRowBinding;
+import com.doctory_client.models.SingleDoctorModel;
+import com.doctory_client.ui.activity_emergency.EmergencyActivity;
 
 import java.util.List;
 
 public class EmergencyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Object> list;
+    private List<SingleDoctorModel> list;
     private Context context;
     private LayoutInflater inflater;
     private AppCompatActivity activity;
 
-    public EmergencyAdapter(List<Object> list, Context context) {
+    public EmergencyAdapter(List<SingleDoctorModel> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -46,12 +48,20 @@ public class EmergencyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
+        myHolder.binding.setModel(list.get(position));
+        myHolder.itemView.setOnClickListener(view -> {
+            if(context instanceof EmergencyActivity){
+                EmergencyActivity activity=(EmergencyActivity)context;
+            SingleDoctorModel doctorModel = null;
+            doctorModel = list.get(myHolder.getAdapterPosition());
+            activity.setItemData(doctorModel,myHolder.binding,myHolder.getAdapterPosition());
+        }});
 
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return list.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {

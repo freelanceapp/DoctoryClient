@@ -57,7 +57,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).fit().into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -67,7 +67,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).fit().into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -87,15 +87,15 @@ public class GeneralMethod {
                 if (result.getPhotos().size()>0)
                 {
                     String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
                 }else
                 {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
                 }
             }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
             }
 
@@ -108,15 +108,15 @@ public class GeneralMethod {
                 if (result.getPhotos().size()>0)
                 {
                     String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
                 }else
                 {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
                 }
             }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
             }
 
@@ -127,15 +127,15 @@ public class GeneralMethod {
                 if (result.getPhotos().size()>0)
                 {
                     String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
                 }else
                 {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
                 }
             }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().fit().into(imageView);
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
 
             }
 
@@ -150,7 +150,7 @@ public class GeneralMethod {
             CircleImageView imageView = (CircleImageView) view;
 
             String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
 
 
@@ -158,13 +158,13 @@ public class GeneralMethod {
             RoundedImageView imageView = (RoundedImageView) view;
 
             String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
         } else if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
 
             String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().fit().into(imageView);
+            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
 
         }
 

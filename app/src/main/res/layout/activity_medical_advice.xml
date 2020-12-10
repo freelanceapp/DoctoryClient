@@ -11,6 +11,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.doctory_client.models.SingleAdviceModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -156,6 +159,7 @@
                     android:layout_margin="10dp"
                     app:riv_corner_radius="8dp"
                     app:riv_border_width="0dp"
+                    image="@{model.image}"
                     />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -194,7 +198,7 @@
                         app:layout_constraintHorizontal_bias="0"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
-                        android:text="@{title}"
+                        android:text="@{model.title}"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         />
@@ -207,6 +211,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:text="@{model.contents}"
                     />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
