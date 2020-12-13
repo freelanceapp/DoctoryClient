@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
 
     @Override
     public void onLoginValid() {
-        Intent intent = new Intent(this, SignUpActivity.class);
+        Intent intent = new Intent(this, ConfirmCodeActivity.class);
         intent.putExtra("phone_code",model.getPhone_code());
         intent.putExtra("phone",model.getPhone());
         intent.putExtra("lat",lat);

@@ -21,6 +21,7 @@ import com.doctory_client.models.UserModel;
 import com.doctory_client.mvp.activity_confirm_code_mvp.ActivityConfirmCodePresenter;
 import com.doctory_client.mvp.activity_confirm_code_mvp.ActivityConfirmCodeView;
 import com.doctory_client.share.Common;
+import com.doctory_client.ui.activity_home.HomeActivity;
 import com.doctory_client.ui.activity_login.LoginActivity;
 import com.doctory_client.ui.activity_sign_up.SignUpActivity;
 import com.google.firebase.FirebaseException;
@@ -115,7 +116,10 @@ public class ConfirmCodeActivity extends AppCompatActivity implements ActivityCo
 
     @Override
     public void onUserFound(UserModel userModel) {
+        Intent intent = new Intent(this, HomeActivity.class);
 
+        startActivity(intent);
+        finish();
     }
 
 
