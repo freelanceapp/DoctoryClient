@@ -192,7 +192,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     }
 
     public void Setitem(SingleReservisionTimeModel.Detials detials) {
-        Intent intent = new Intent(this, ClinicReservationActivity.class);
+        Intent intent = new Intent(this, CompleteClinicReservationActivity.class);
         if (doctorModel != null) {
             intent.putExtra("data", doctorModel);
             intent.putExtra("type", 0);

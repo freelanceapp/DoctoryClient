@@ -35,19 +35,13 @@ public class GeneralMethod {
     }
 
 
-
-
-
-
-
-
     @BindingAdapter("image")
     public static void image(View view, String endPoint) {
         if (view instanceof CircleImageView) {
             CircleImageView imageView = (CircleImageView) view;
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720, 480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -57,7 +51,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720, 480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -67,7 +61,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720,480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL + endPoint)).resize(720, 480).onlyScaleDown().placeholder(R.drawable.ic_avatar).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -83,59 +77,52 @@ public class GeneralMethod {
 
 
             //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAA_sTOr-cDhIZuoi4D0YpT9EmNM2UWY5Vb2fDcqO-_SQ9Qmf2dyNFg_gtSs-dXu4puk6Q957hhfPKvsfhY8w7W2aL-w9HfPrHlitd1PAA-vxb85ZDYEdxIleV8y9_uQQwzEhC-npYoXzXwrwrrxasjKXLQGhTi_joH1kyW7hzZIAIY5c04_27qUg&key=AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q
-            if (result.getPhotos()!=null){
-                if (result.getPhotos().size()>0)
-                {
-                    String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
+            if (result.getPhotos() != null) {
+                if (result.getPhotos().size() > 0) {
+                    String url = Tags.IMAGE_Places_URL + result.getPhotos().get(0).getPhoto_reference() + "&key=" + view.getContext().getString(R.string.map_api_key);
+                    Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
-                }else
-                {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+                } else {
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
                 }
-            }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+            } else {
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
             }
-
 
 
         } else if (view instanceof RoundedImageView) {
             RoundedImageView imageView = (RoundedImageView) view;
 
-            if (result.getPhotos()!=null){
-                if (result.getPhotos().size()>0)
-                {
-                    String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
+            if (result.getPhotos() != null) {
+                if (result.getPhotos().size() > 0) {
+                    String url = Tags.IMAGE_Places_URL + result.getPhotos().get(0).getPhoto_reference() + "&key=" + view.getContext().getString(R.string.map_api_key);
+                    Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
-                }else
-                {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+                } else {
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
                 }
-            }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+            } else {
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
             }
 
         } else if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
 
-            if (result.getPhotos()!=null){
-                if (result.getPhotos().size()>0)
-                {
-                    String url = Tags.IMAGE_Places_URL+result.getPhotos().get(0).getPhoto_reference()+"&key="+view.getContext().getString(R.string.map_api_key);
-                    Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
+            if (result.getPhotos() != null) {
+                if (result.getPhotos().size() > 0) {
+                    String url = Tags.IMAGE_Places_URL + result.getPhotos().get(0).getPhoto_reference() + "&key=" + view.getContext().getString(R.string.map_api_key);
+                    Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
-                }else
-                {
-                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+                } else {
+                    Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
                 }
-            }else {
-                Picasso.get().load(Uri.parse(result.getIcon())).resize(720,480).onlyScaleDown().into(imageView);
+            } else {
+                Picasso.get().load(Uri.parse(result.getIcon())).resize(720, 480).onlyScaleDown().into(imageView);
 
             }
 
@@ -149,30 +136,29 @@ public class GeneralMethod {
         if (view instanceof CircleImageView) {
             CircleImageView imageView = (CircleImageView) view;
 
-            String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
-
+            String url = Tags.IMAGE_Places_URL + reference + "&key=" + view.getContext().getString(R.string.map_api_key);
+            Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
 
         } else if (view instanceof RoundedImageView) {
             RoundedImageView imageView = (RoundedImageView) view;
 
-            String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
+            String url = Tags.IMAGE_Places_URL + reference + "&key=" + view.getContext().getString(R.string.map_api_key);
+            Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
         } else if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
 
-            String url = Tags.IMAGE_Places_URL+reference+"&key="+view.getContext().getString(R.string.map_api_key);
-            Picasso.get().load(Uri.parse(url)).resize(720,480).onlyScaleDown().into(imageView);
+            String url = Tags.IMAGE_Places_URL + reference + "&key=" + view.getContext().getString(R.string.map_api_key);
+            Picasso.get().load(Uri.parse(url)).resize(720, 480).onlyScaleDown().into(imageView);
 
         }
 
     }
 
     @BindingAdapter("distance")
-    public static void distance(TextView view,double distance){
-        view.setText(String.format(Locale.ENGLISH,"%.2f %s",distance,view.getContext().getString(R.string.km)));
+    public static void distance(TextView view, double distance) {
+        view.setText(String.format(Locale.ENGLISH, "%.2f %s", distance, view.getContext().getString(R.string.km)));
     }
 
     @BindingAdapter("rate")
