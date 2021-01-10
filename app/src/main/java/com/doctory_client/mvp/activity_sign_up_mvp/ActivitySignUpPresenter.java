@@ -151,7 +151,7 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
 
     private void sign_up_with_image(SignUpModel signUpModel) {
         RequestBody name_part = Common.getRequestBodyText(signUpModel.getName());
-        RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code().replace("+", "00"));
+        RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code());
         RequestBody phone_part = Common.getRequestBodyText(signUpModel.getPhone());
         RequestBody birth_part = Common.getRequestBodyText(signUpModel.getBirth_date());
         RequestBody blood_part = Common.getRequestBodyText(signUpModel.getBlood_type());
@@ -161,7 +161,7 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
         RequestBody soft_part = Common.getRequestBodyText("android");
 
         List<RequestBody> diseases_part = new ArrayList<>();
-        for (int i = 0 ; i < signUpModel.getDiseaseModelList().size(); i++) {
+        for (int i = 0; i < signUpModel.getDiseaseModelList().size(); i++) {
             diseases_part.add(Common.getRequestBodyText(signUpModel.getDiseaseModelList().get(i).getId() + ""));
         }
 
@@ -188,8 +188,11 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
                             if (response.code() == 500) {
                                 view.onServer();
                             } else {
-                                view.onFailed();
-                                //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                if (response.code() == 406) {
+                                    view.onFailed(context.getString(R.string.phone_found));
+                                } else {
+                                    view.onFailed(response.message() + "");
+                                }                                 //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -217,9 +220,9 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
     }
 
     private void sign_up_without_image(SignUpModel signUpModel) {
-     Log.e("ddddd",signUpModel.getPhone_code()+" "+ signUpModel.getPhone()+" " +signUpModel.getName()+" "+  signUpModel.getBirth_date()+" "+  signUpModel.getBlood_type()+" "+ signUpModel.getGender()+" "+ "patient"+" "+ "android");
+        Log.e("ddddd", signUpModel.getPhone_code() + " " + signUpModel.getPhone() + " " + signUpModel.getName() + " " + signUpModel.getBirth_date() + " " + signUpModel.getBlood_type() + " " + signUpModel.getGender() + " " + "patient" + " " + "android");
         List<String> diseases_part = new ArrayList<>();
-        for (int i = 0 ; i < signUpModel.getDiseaseModelList().size(); i++) {
+        for (int i = 0; i < signUpModel.getDiseaseModelList().size(); i++) {
             diseases_part.add(signUpModel.getDiseaseModelList().get(i).getId() + "");
         }
         view.onLoad();
@@ -243,7 +246,11 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
                             if (response.code() == 500) {
                                 view.onServer();
                             } else {
-                                view.onFailed();
+                                if (response.code() == 406) {
+                                    view.onFailed(context.getString(R.string.phone_found));
+                                } else {
+                                    view.onFailed(response.message() + "");
+                                }
                                 //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
                         }

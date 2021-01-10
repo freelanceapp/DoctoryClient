@@ -110,20 +110,21 @@
                         />
                 </LinearLayout>
 
+
                 <EditText
                     android:id="@+id/edtConsultation"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="10dp"
-                    android:inputType="textMultiLine"
                     android:background="@drawable/small_rounded_gray_strock"
-                    android:padding="10dp"
                     android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
 
                     />
 
-
                 <Button
+                    android:id="@+id/btsend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

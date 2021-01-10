@@ -7,16 +7,24 @@ import com.doctory_client.models.AllSpiclixationModel;
 import com.doctory_client.models.ApointmentModel;
 import com.doctory_client.models.DiseaseModel;
 import com.doctory_client.models.DoctorModel;
+import com.doctory_client.models.DrugDataModel;
+import com.doctory_client.models.FavouriteDoctorModel;
+import com.doctory_client.models.MessageDataModel;
+import com.doctory_client.models.MessageModel;
 import com.doctory_client.models.NearbyModel;
 import com.doctory_client.models.NotificationModel;
 import com.doctory_client.models.PlaceDetailsModel;
 import com.doctory_client.models.PlaceGeocodeData;
 import com.doctory_client.models.PlaceMapDetailsData;
+import com.doctory_client.models.ReasonModel;
 import com.doctory_client.models.ReservisionTimeModel;
+import com.doctory_client.models.RoomIdModel;
+import com.doctory_client.models.SettingModel;
 import com.doctory_client.models.SingleAdviceModel;
 import com.doctory_client.models.SingleDataDoctorModel;
 import com.doctory_client.models.Slider_Model;
 import com.doctory_client.models.UserModel;
+import com.doctory_client.models.UserRoomModelData;
 
 import java.util.List;
 
@@ -211,6 +219,137 @@ public interface Service {
     Call<NotificationModel> getnotification(
             @Query("user_id") String user_id
 
+
+
+    );
+
+    @GET("api/reason-lists")
+    Call<ReasonModel> getreasons();
+
+    @FormUrlEncoded
+    @POST("api/cancel-reservation")
+    Call<ResponseBody> cancelreervision(@Field("reservation_id") String reservation_id,
+                                        @Field("cancel_reason") String cancel_reason
+
+    );
+    @FormUrlEncoded
+    @POST("api/favourite")
+    Call<ResponseBody> likeunlike(@Header("Authorization") String user_token,
+                                  @Field("user_id") String user_id,
+                                  @Field("doctor_id") String doctor_id
+    );
+    @GET("api/settings")
+    Call<SettingModel> getSetting();
+    @FormUrlEncoded
+    @POST("api/update-patient-register")
+    Call<UserModel> editprofile(
+            @Header("Authorization") String user_token,
+            @Field("phone_code") String phone_code,
+            @Field("phone") String phone,
+            @Field("name") String name,
+            @Field("birth_day") String birth_day,
+            @Field("blood_type") String blood_type,
+            @Field("gender") String gender,
+            @Field("user_type") String user_type,
+            @Field("software_type") String software_type,
+            @Field("diseases_ids[]") List<String> diseases_ids,
+            @Field("id") String id
+
+
+    );
+
+    @Multipart
+    @POST("api/update-patient-register")
+    Call<UserModel> editprofile(
+            @Header("Authorization") String user_token,
+            @Part("phone_code") RequestBody phone_code,
+            @Part("phone") RequestBody phone,
+            @Part("name") RequestBody name,
+            @Part("birth_day") RequestBody birth_day,
+            @Part("blood_type") RequestBody blood_type,
+            @Part("gender") RequestBody gender,
+            @Part("user_type") RequestBody user_type,
+            @Part("software_type") RequestBody software_type,
+            @Part("diseases_ids[]") List<RequestBody> diseases_ids,
+            @Part("id") RequestBody id,
+            @Part MultipartBody.Part image
+
+
+    );
+    @GET("api/get-medical-consultings")
+    Call<UserRoomModelData> getRooms(
+            @Query("user_id") int user_id,
+            @Query("user_type") String user_type,
+            @Query("pagination_status") String pagination_status
+
+    );
+
+    @GET("api/get-one-consulting")
+    Call<MessageModel> getRoomMessages(
+            @Query("medical_consulting_id") int medical_consulting_id,
+            @Query("pagination_status") String pagination_status,
+            @Query("per_link_") int per_link_,
+            @Query("page") int page
+
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/add-msg")
+    Call<MessageDataModel> sendmessagetext(
+            @Field("from_user_id") String from_id,
+
+            @Field("to_user_id") String to_id,
+            @Field("type") String type,
+            @Field("medical_consulting_id") String medical_consulting_id,
+            @Field("message") String message
+
+
+    );
+
+    @Multipart
+    @POST("api/add-msg")
+    Call<MessageDataModel> sendmessagewithimage
+            (
+                    @Part("from_user_id") RequestBody from_user_id,
+                    @Part("to_user_id") RequestBody to_user_id,
+                    @Part("type") RequestBody type,
+                    @Part("medical_consulting_id") RequestBody medical_consulting_id,
+                    @Part MultipartBody.Part imagepart
+
+            );
+
+    @FormUrlEncoded
+    @POST("api/add-consulting")
+    Call<RoomIdModel> createroom(
+            @Field("user_id") String user_id,
+            @Field("doctor_id") String doctor_id,
+            @Field("type") String type,
+            @Field("message") String message
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/contact-us")
+    Call<ResponseBody> contactUs(@Field("name") String name,
+                                 @Field("email") String email,
+                                 @Field("subject") String subject,
+                                 @Field("message") String message
+
+
+    );
+    @GET("api/my-favourites")
+    Call<FavouriteDoctorModel> getdoctorsfav(
+            @Header("Authorization") String user_token,
+            @Query("user_id") String user_id,
+            @Query("pagination_status") String pagination_status
+
+    );
+    @GET("api/get-reservation-with-drugs")
+    Call<DrugDataModel> getDrugs(@Header("Authorization") String Authorization,
+                                 @Query("pagination_status") String doctor_id,
+                                 @Query("user_id") int user_id
 
     );
 }

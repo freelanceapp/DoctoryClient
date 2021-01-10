@@ -137,5 +137,18 @@
     <string name="cancel_reservision">الغاء الحجز</string>
     <string name="set_another_appointment">حدد ميعاد اخر</string>
     <string name="not_notification_to_show">لا يوجد اشعارات لعرضها</string>
+    <string name="not_avail_now">Not Available Now</string>
+    <string name="cancel_reason">Cancel Reason</string>
+    <string name="you_can_call_doctor_on">تستطيع مكالمة الدكتور على </string>
+    <string name="phone_found">Phone Found</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="favourite">Favourite</string>
+    <string name="link_inc">هذا الرابط غير صحيح</string>
+    <string name="type_message">Type Mesaage</string>
+    <string name="select_disease">Select Disease</string>
+    <string name="show_all">Show All</string>
+    <string name="drug_name">Drug Name</string>
+    <string name="dose">Dose</string>
 
 </resources>

@@ -3,6 +3,9 @@ package com.doctory_client.mvp.actvity_reservision_detials_mvp;
 import android.content.Context;
 import android.util.Log;
 
+import com.doctory_client.R;
+import com.doctory_client.models.ApointmentModel;
+import com.doctory_client.models.ReasonModel;
 import com.doctory_client.models.SingleDoctorModel;
 import com.doctory_client.models.SingleReservisionTimeModel;
 import com.doctory_client.models.UserModel;
@@ -24,67 +27,98 @@ public class ActivityReservationDetialsPresenter {
         this.context = context;
         this.view = view;
     }
-    public void addresrevision(UserModel userModel, SingleDoctorModel singleDoctorModel, SingleReservisionTimeModel.Detials detials,String date,String dayname) {
 
-        //Log.e("llll",detials.getFrom_hour_type());
-        if(userModel!=null) {
-    view.onLoad();
-    Api.getService(Tags.base_url)
-            .addreservision(userModel.getData().getId() + "", singleDoctorModel.getId() + "", date, detials.getFrom(), singleDoctorModel.getDetection_price() + "", "normal", dayname.toUpperCase(),detials.getFrom_hour_type())
-            .enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    view.onFinishload();
-                    if (response.isSuccessful() && response.body() != null) {
-                        //  Log.e("eeeeee", response.body().getUser().getName());
-                        //view.onSignupValid(response.body());
-                        view.onsucsess();
-                    } else {
-                        try {
-                            Log.e("mmmmmmmmmmssss", response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+    public void getreasons() {
+        // Log.e("tjtjtj",userModel.getIs_confirmed());
+        view.onProgressShow();
 
+        Api.getService(Tags.base_url)
+                .getreasons()
+                .enqueue(new Callback<ReasonModel>() {
+                    @Override
+                    public void onResponse(Call<ReasonModel> call, Response<ReasonModel> response) {
+                        view.onProgressHide();
 
-                        if (response.code() == 500) {
-                            view.onServer();
+                        if (response.isSuccessful() && response.body() != null) {
+                            view.onSuccess(response.body());
                         } else {
+                            view.onProgressHide();
+                            view.onFailed(context.getString(R.string.something));
                             try {
-                                view.onFailed(response.errorBody().string());
+                                Log.e("error_codess", response.code() + response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ReasonModel> call, Throwable t) {
+                        try {
+                            view.onProgressHide();
+                            view.onFailed(context.getString(R.string.something));
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+
                         }
                     }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    try {
-                        view.onFinishload();
-                        if (t.getMessage() != null) {
-                            Log.e("msg_category_error", t.getMessage() + "__");
-
-                            if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                view.onnotconnect(t.getMessage().toLowerCase());
-                                //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            } else {
-                                view.onFailed();
-                                // Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    } catch (Exception e) {
-                        Log.e("Error", e.getMessage() + "__");
-                    }
-                }
-            });
-
-}
-else {
-    view.onnotlogin();
-}
+                });
     }
 
+    public void cancelreserv(String reason, ApointmentModel.Data apointmentModel) {
+        view.onLoad();
+        Api.getService(Tags.base_url)
+                .cancelreervision(apointmentModel.getId() + "", reason)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        view.onFinishload();
+                        if (response.isSuccessful() && response.body() != null) {
+                            //  Log.e("eeeeee", response.body().getUser().getName());
+                            //view.onSignupValid(response.body());
+                            view.onsucsess();
+                        } else {
+                            try {
+                                Log.e("mmmmmmmmmmssss", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            if (response.code() == 500) {
+                                view.onServer();
+                            } else {
+                                try {
+                                    view.onFailed(response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        try {
+                            view.onFinishload();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    view.onnotconnect(t.getMessage().toLowerCase());
+                                    //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    view.onFailed();
+                                    // Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
 }

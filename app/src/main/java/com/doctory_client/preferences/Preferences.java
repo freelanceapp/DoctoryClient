@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.doctory_client.models.ChatUserModel;
 import com.doctory_client.models.UserModel;
 import com.doctory_client.models.UserSettingsModel;
 import com.doctory_client.tags.Tags;
@@ -107,6 +108,29 @@ public class Preferences {
         edit3.clear();
         edit3.apply();
         create_update_session(context, Tags.session_logout);
+    }
+    public void clearChatUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+    public void create_update_ChatUserData(Context context , ChatUserModel chatUserModel)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String userDataGson = gson.toJson(chatUserModel);
+        editor.putString("chat_user_data",userDataGson);
+        editor.apply();
+    }
+
+    public ChatUserModel getChatUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        String userDataGson = preferences.getString("chat_user_data","");
+        return new Gson().fromJson(userDataGson, ChatUserModel.class);
     }
 
 

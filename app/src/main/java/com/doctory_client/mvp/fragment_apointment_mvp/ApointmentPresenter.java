@@ -30,7 +30,7 @@ public class ApointmentPresenter {
 
     public void getApointment(UserModel userModel) {
 
-        Log.e("mmmmmmm",userModel.getData().getId()+"");
+     //   Log.e("mmmmmmm",userModel.getData().getId()+"");
         view.showProgressBar();
         Api.getService(Tags.base_url).getMyApointment("off",1,1,userModel.getData().getId(),"normal")
                 .enqueue(new Callback<ApointmentModel>() {

@@ -137,4 +137,18 @@
     <string name="cancel_reservision">Cancel Reservision</string>
     <string name="set_another_appointment">Set another appointment</string>
     <string name="not_notification_to_show">Not Notification To Show</string>
+    <string name="not_avail_now">Not Available Now</string>
+    <string name="cancel_reason">Cancel Reason</string>
+    <string name="you_can_call_doctor_on">You Can Call Doctor on</string>
+    <string name="phone_found">Phone Found</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="favourite">Favourite</string>
+    <string name="link_inc">This link is incorrect</string>
+    <string name="type_message">Type Mesaage</string>
+    <string name="select_disease">Select Disease</string>
+    <string name="show_all">Show All</string>
+    <string name="drug_name">Drug Name</string>
+    <string name="dose">Dose</string>
+
 </resources>

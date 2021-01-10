@@ -31,6 +31,7 @@ import com.doctory_client.mvp.activity_doctor_detials_mvp.ActivityDoctorDetialsP
 import com.doctory_client.mvp.activity_doctor_detials_mvp.DoctorDetialsActivityView;
 import com.doctory_client.preferences.Preferences;
 import com.doctory_client.share.Common;
+import com.doctory_client.tags.Tags;
 import com.doctory_client.ui.activity_clinic_reservation.ClinicReservationActivity;
 import com.doctory_client.ui.activity_consulting_reservation.ConsultingReservationActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -112,15 +113,28 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
         binding.btnClinicReserve.setOnClickListener(view -> {
             Intent intent = new Intent(this, ClinicReservationActivity.class);
             intent.putExtra("data", doctorModel);
-            startActivityForResult(intent,1);
+            startActivityForResult(intent, 1);
 
         });
-
         binding.btnConsultationReserve.setOnClickListener(view -> {
             Intent intent = new Intent(this, ConsultingReservationActivity.class);
             intent.putExtra("data", doctorModel);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
+
         });
+        binding.checkbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.likeunlike(doctorModel.getId(), userModel);
+            }
+        });
+        binding.imageshare.setOnClickListener(new
+                                                      View.OnClickListener() {
+                                                          @Override
+                                                          public void onClick(View v) {
+                                                              share(doctorModel.getId());
+                                                          }
+                                                      });
         updateUI();
         rateAdapter = new RateAdapter(ratesList, this);
         binding.recView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -191,6 +205,7 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
 
     @Override
     public void ondoctorsucess(SingleDataDoctorModel body) {
+        this.doctorModel = body.getData();
         binding.setModel(body.getData());
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setVisibility(View.VISIBLE);
@@ -198,19 +213,39 @@ public class DoctorDetailsActivity extends AppCompatActivity implements OnMapRea
 
         ratesList.addAll(body.getData().getRates_fk());
         rateAdapter.notifyDataSetChanged();
-        if(ratesList.size()==0){
+        if (ratesList.size() == 0) {
             binding.card.setVisibility(View.GONE);
+        }
+        if (doctorModel.getFav_fk() != null) {
+            binding.checkbox.setChecked(true);
+        } else {
+            binding.checkbox.setChecked(false);
         }
         AddMarker(body.getData().getLatitude(), body.getData().getLongitude());
     }
+
+    @Override
+    public void onlikesucess() {
+        presenter.getDoctorDtials(doctorModel, userModel.getData().getId() + "");
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode== Activity.RESULT_OK){
-            Intent intent=getIntent();
-            setResult(RESULT_OK,intent);
+        if (resultCode == Activity.RESULT_OK) {
+            Intent intent = getIntent();
+            setResult(RESULT_OK, intent);
 
-            finish();}
+            finish();
+        }
     }
+
+    public void share(int id) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, Tags.base_url + "share-app?id="+id);
+        startActivity(intent);
+    }
+
 
 }

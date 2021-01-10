@@ -11,6 +11,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -187,4 +189,16 @@ presenter.notlogin();
         startActivity(intent);
     }
 
+    public void refreshActivity(String lang) {
+        new Handler(Looper.getMainLooper()).postDelayed(()->{
+            Paper.init(this);
+            Paper.book().write("lang",lang);
+            Language.updateResources(this,lang);
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        },1500);
+
+
+    }
 }
