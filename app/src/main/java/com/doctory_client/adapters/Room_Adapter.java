@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doctory_client.R;
 import com.doctory_client.databinding.LoadMoreRowBinding;
 import com.doctory_client.databinding.UserSearchRowBinding;
 import com.doctory_client.models.UserRoomModelData;
+import com.doctory_client.ui.activity_home.HomeActivity;
+import com.doctory_client.ui.activity_home.fragments.Fragment_Consulting;
 import com.doctory_client.ui.activity_room.ChatRoomActivity;
 
 import java.util.List;
@@ -24,13 +27,15 @@ public class Room_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private List<UserRoomModelData.UserRoomModel> userRoomModelList;
     private Context context;
-    private ChatRoomActivity chatRoomActivity;
+    private HomeActivity chatRoomActivity;
+    private Fragment fragment;
 
-    public Room_Adapter(Context context, List<UserRoomModelData.UserRoomModel> userRoomModelList) {
+    public Room_Adapter(Context context, List<UserRoomModelData.UserRoomModel> userRoomModelList, Fragment fragment) {
 
         this.userRoomModelList = userRoomModelList;
         this.context = context;
-        chatRoomActivity = (ChatRoomActivity) context;
+        chatRoomActivity = (HomeActivity) context;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -59,9 +64,10 @@ public class Room_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
             myHolder.itemView.setOnClickListener(v -> {
+                Fragment_Consulting fragment_chat=(Fragment_Consulting)fragment;
                 UserRoomModelData.UserRoomModel userRoomModel1 = userRoomModelList.get(myHolder.getAdapterPosition());
                 // fragment.setItemData(userRoomModel1,myHolder.getAdapterPosition());
-                chatRoomActivity.setItemData(userRoomModel1, holder.getLayoutPosition());
+                fragment_chat.setItemData(userRoomModel1, holder.getLayoutPosition());
             });
         } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
