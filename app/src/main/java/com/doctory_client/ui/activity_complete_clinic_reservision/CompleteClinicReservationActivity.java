@@ -52,6 +52,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
     private ProgressDialog dialog2;
     private UserModel usermodel;
     private Preferences preferences;
+    private int reservid;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -75,6 +76,8 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
         date = intent.getStringExtra("date");
         dayname = intent.getStringExtra("dayname");
         type=intent.getIntExtra("type",0);
+        reservid =intent.getIntExtra("resrvid",0);
+
     }
 
     private void initView() {
@@ -100,6 +103,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
                     presenter.addresrevision(usermodel, doctorModel, singletimemodel, date, dayname);
                 }
                 else {
+                    presenter.updateresrevision(usermodel,  singletimemodel, date,  reservid,dayname);
 
                 }
             }

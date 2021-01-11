@@ -352,4 +352,14 @@ public interface Service {
                                  @Query("user_id") int user_id
 
     );
+    @FormUrlEncoded
+    @POST("api/change-reservations")
+    Call<ResponseBody> updatereservision(@Field("reservation_id") String reservation_id,
+                                         @Field("date") String date,
+                                         @Field("time") String time,
+                                         @Field("time_type") String time_type,
+                                         @Field("day_name") String day_name
+
+
+    );
 }

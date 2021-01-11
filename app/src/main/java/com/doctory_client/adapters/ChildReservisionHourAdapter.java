@@ -1,6 +1,7 @@
 package com.doctory_client.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -46,7 +47,7 @@ public class ChildReservisionHourAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
-
+        Log.e("ddkkdkdd",list.get(holder.getLayoutPosition()).getType());
         myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(view -> {

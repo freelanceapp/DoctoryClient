@@ -111,13 +111,25 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
             type = "normal";
             binding.flClinic.setBackgroundResource(R.drawable.small_rounded_red_strock);
             binding.flLive.setBackgroundResource(0);
+            if(doctorModel!=null){
+                presenter.getreservisiontime(doctorModel,type,date,dayname.toUpperCase());}
+            else {
+                presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, dayname.toUpperCase());
 
+            }
         });
 
         binding.cardLive.setOnClickListener(view -> {
-            type = "live";
+            type = "online";
             binding.flClinic.setBackgroundResource(0);
             binding.flLive.setBackgroundResource(R.drawable.small_rounded_red_strock);
+            if(doctorModel!=null){
+            presenter.getreservisiontime(doctorModel,type,date,dayname.toUpperCase());}
+            else {
+                presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, dayname.toUpperCase());
+
+            }
+
         });
 
         binding.imageBack.setOnClickListener(view -> {
@@ -137,8 +149,14 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         if (doctorModel != null) {
             presenter.getreservisiontime(doctorModel, type, date, stringDate.toUpperCase());
         } else {
+            date=apointmentModel.getDate();
+            dayname=apointmentModel.getDay_name();
+            type=apointmentModel.getReservation_type();
+            Log.e("fkfkkf",date+dayname+type);
             presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, stringDate.toUpperCase());
         }
+        binding.tvDate.setText(date);
+
     }
 
     @Override
@@ -176,6 +194,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
     @Override
     public void onreservtimesucess(ReservisionTimeModel body) {
         singleReservisionTimeModelList.clear();
+        reservisionHourAdapter.notifyDataSetChanged();
         singleReservisionTimeModelList.addAll(body.getData());
         reservisionHourAdapter.notifyDataSetChanged();
         if (singleReservisionTimeModelList.size() == 0) {
@@ -183,6 +202,8 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         } else {
             binding.tvNoData.setVisibility(View.GONE);
         }
+        detialsList.clear();
+        childReservisionHourAdapter.notifyDataSetChanged();
     }
 
     public void getchild(int position) {
@@ -196,9 +217,15 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         if (doctorModel != null) {
             intent.putExtra("data", doctorModel);
             intent.putExtra("type", 0);
+            intent.putExtra("resrvid", 0);
+
         } else {
             intent.putExtra("type", apointmentModel.getId());
             intent.putExtra("data", apointmentModel.getDoctor_fk());
+            intent.putExtra("resrvid", apointmentModel.getId());
+            if (dayname.isEmpty()) {
+                dayname = apointmentModel.getDay_name();
+            }
         }
         intent.putExtra("time", detials);
         intent.putExtra("dayname", dayname);
