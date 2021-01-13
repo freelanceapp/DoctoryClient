@@ -1,14 +1,26 @@
 package com.doctory_client.ui.activity_live;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.view.animation.LinearInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.doctory_client.R;
+import com.doctory_client.databinding.ActivityDoctorDetailsBinding;
 import com.doctory_client.databinding.ActivityLiveBinding;
 import com.doctory_client.language.Language;
+import com.doctory_client.models.DoctorModel;
 
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
@@ -22,6 +34,7 @@ import io.paperdb.Paper;
 public class LiveActivity extends AppCompatActivity {
     private String lang;
     private ActivityLiveBinding binding;
+    private int roomid;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -33,8 +46,13 @@ public class LiveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_live);
+        getDataFromIntent();
         initView();
 
+    }
+
+    private void getDataFromIntent() {
+        roomid=getIntent().getIntExtra("room",0);
     }
 
     private void initView() {
@@ -46,7 +64,7 @@ public class LiveActivity extends AppCompatActivity {
             JitsiMeetUserInfo userInfo = new JitsiMeetUserInfo();
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                     .setServerURL(new URL("https://meet.jit.si"))
-                    .setRoom("مطمئن")
+                    .setRoom(roomid+"")
                     .setUserInfo(userInfo)
                     .setAudioMuted(false)
                     .setVideoMuted(false)
@@ -58,5 +76,6 @@ public class LiveActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
 }
