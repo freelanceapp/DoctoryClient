@@ -37,13 +37,13 @@ public class ActivityCompleteClinicReservationPresenter {
         this.context = context;
         this.view = view;
     }
-    public void addresrevision(UserModel userModel, SingleDoctorModel singleDoctorModel, SingleReservisionTimeModel.Detials detials,String date,String dayname) {
+    public void addresrevision(UserModel userModel, SingleDoctorModel singleDoctorModel, SingleReservisionTimeModel.Detials detials, String date, String dayname, String type) {
 
         //Log.e("llll",detials.getFrom_hour_type());
         if(userModel!=null) {
     view.onLoad();
     Api.getService(Tags.base_url)
-            .addreservision(userModel.getData().getId() + "", singleDoctorModel.getId() + "", date, detials.getFrom(), singleDoctorModel.getDetection_price() + "", "normal", dayname.toUpperCase(),detials.getFrom_hour_type())
+            .addreservision(userModel.getData().getId() + "", singleDoctorModel.getId() + "", date, detials.getFrom(), singleDoctorModel.getDetection_price() + "", type, dayname.toUpperCase(),detials.getFrom_hour_type())
             .enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

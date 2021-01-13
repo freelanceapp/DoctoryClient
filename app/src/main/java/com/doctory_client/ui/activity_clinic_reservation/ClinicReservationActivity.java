@@ -153,7 +153,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
             dayname=apointmentModel.getDay_name();
             type=apointmentModel.getReservation_type();
             Log.e("fkfkkf",date+dayname+type);
-            presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, stringDate.toUpperCase());
+            presenter.getreservisiontime(apointmentModel.getDoctor_fk(), type, date, dayname.toUpperCase());
         }
         binding.tvDate.setText(date);
 
@@ -230,6 +230,7 @@ public class ClinicReservationActivity extends AppCompatActivity implements Acti
         intent.putExtra("time", detials);
         intent.putExtra("dayname", dayname);
         intent.putExtra("date", date);
+        intent.putExtra("redate", type);
         startActivityForResult(intent, 1);
 
     }

@@ -17,6 +17,8 @@ import com.doctory_client.share.Common;
 import com.doctory_client.tags.Tags;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -116,7 +118,7 @@ public class ActivitySignUpPresenter implements DatePickerDialog.OnDateSetListen
                     }
 
                     @Override
-                    public void onFailure(Call<AllDiseasesModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<AllDiseasesModel> call, Throwable t) {
                         try {
                             view.onFinishload();
                             view.onFailed(context.getString(R.string.something));

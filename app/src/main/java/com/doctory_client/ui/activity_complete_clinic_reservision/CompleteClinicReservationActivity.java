@@ -47,6 +47,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
     private String date = "";
     private String dayname = "";
     private int type;
+    private String reservtype;
     private ActivityCompleteClinicReservationPresenter presenter;
     SingleReservisionTimeModel.Detials singletimemodel;
     private ProgressDialog dialog2;
@@ -77,6 +78,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
         dayname = intent.getStringExtra("dayname");
         type=intent.getIntExtra("type",0);
         reservid =intent.getIntExtra("resrvid",0);
+        reservtype=intent.getStringExtra("redate");
 
     }
 
@@ -100,7 +102,7 @@ public class CompleteClinicReservationActivity extends AppCompatActivity impleme
             @Override
             public void onClick(View view) {
                 if(type==0) {
-                    presenter.addresrevision(usermodel, doctorModel, singletimemodel, date, dayname);
+                    presenter.addresrevision(usermodel, doctorModel, singletimemodel, date, dayname,reservtype);
                 }
                 else {
                     presenter.updateresrevision(usermodel,  singletimemodel, date,  reservid,dayname);
