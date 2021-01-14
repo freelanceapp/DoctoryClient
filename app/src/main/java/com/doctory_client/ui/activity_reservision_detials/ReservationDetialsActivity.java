@@ -284,21 +284,21 @@ public class ReservationDetialsActivity extends AppCompatActivity implements Act
             if (data.getReservation_type().equals("online")) {
                 Intent intent = new Intent(this, LiveActivity.class);
                 intent.putExtra("room", data.getId());
-                startActivity(intent);
-            } else {
-                intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", data.getDoctor_fk().getPhone_code() + data.getDoctor_fk().getPhone(), null));
-                if (intent != null) {
-                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
-                        } else {
-                            startActivity(intent);
-                        }
-                    } else {
-                        startActivity(intent);
-                    }
-                }
-            }
+                startActivity(intent);}
+//            } else {
+//                intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", data.getDoctor_fk().getPhone_code() + data.getDoctor_fk().getPhone(), null));
+//                if (intent != null) {
+//                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+//                        } else {
+//                            startActivity(intent);
+//                        }
+//                    } else {
+//                        startActivity(intent);
+//                    }
+//                }
+//            }
         } else {
             Toast.makeText(this, getResources().getString(R.string.not_avail_now), Toast.LENGTH_LONG).show();
         }
