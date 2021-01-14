@@ -349,7 +349,7 @@
                 android:text='@{@string/you_can_call_doctor_on+" "+model.time}'
                 android:textColor="@color/white"
                 android:textSize="13sp"
-                android:visibility='@{model.reservation_type.equals("normal")?View.GONE:View.VISIBLE,default=visible}' />
+                android:visibility='@{model.reservation_type.equals("normal")?View.GONE:View.VISIBLE,default=gone}' />
         </LinearLayout>
 
         <FrameLayout
